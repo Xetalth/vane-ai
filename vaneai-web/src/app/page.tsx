@@ -1,74 +1,78 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { 
-  ShieldAlert, 
-  Activity, 
-  Terminal, 
-  CheckCircle2, 
-  AlertTriangle, 
-  Play, 
-  Flame, 
-  Clock, 
-  Layers, 
-  ChevronRight,
-  UserCheck,
-  RefreshCw
-} from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import Navbar from "@/components/Navbar";
+import FlagList from "@/components/FlagList";
+import TelemetryPanel from "@/components/TelemetryPanel";
+import CodeContextViewer from "@/components/CodeContextViewer";
+import AuditTrail from "@/components/AuditTrail";
+import ImportFlagModal from "@/components/ImportFlagModal";
+import { FeatureFlag, Organization, TelemetryData } from "@/types";
 
-interface AgentAudit {
-  id: number;
-  risk_score: number;
-  risk_tier: string;
-  action_taken: string;
-  execution_status: string;
+interface RemediationState {
+  tier: "yellow" | "red" | "nominal";
+  rootCause: string;
   reasoning: string;
-  payload: string;
-  created_at: string;
+  diff: string | null;
+  appliedAt?: string;
 }
 
-interface CanaryMetric {
-  id: number;
-  error_rate: number;
-  latency_p99: number;
-  crash_count: number;
-  sample_size: number;
-  logs_payload: string;
-  created_at: string;
-}
-
-interface FeatureFlag {
-  id: number;
-  name: string;
-  key: string;
-  description: string;
-  environment: string;
-  status: string;
-  rollout_percentage: number;
-  agent_audits: AgentAudit[];
-  canary_metrics: CanaryMetric[];
-}
-
-export default function VaneAIDashboard() {
+export default function Home() {
+  const [org, setOrg] = useState<Organization | null>({
+    id: 1,
+    name: "Acme Cloud",
+    cluster_region: "US-East (Virginia)",
+  });
   const [flags, setFlags] = useState<FeatureFlag[]>([]);
   const [selectedFlag, setSelectedFlag] = useState<FeatureFlag | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [simulating, setSimulating] = useState<boolean>(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [telemetry, setTelemetry] = useState<TelemetryData>({
+    errorRate: 0.04,
+    p99Latency: 110,
+    activeCrashes: 0,
+    canarySample: "25.000 reqs",
+  });
+
+  const [logs, setLogs] = useState<string[]>([]);
+  const [remediation, setRemediation] = useState<RemediationState | null>(null);
+  const [isApplyingPatch, setIsApplyingPatch] = useState(false);
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  const loopRef = useRef<NodeJS.Timeout | null>(null);
+  const currentRolloutRef = useRef<number>(5);
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+  useEffect(() => {
+    if (selectedFlag) {
+      currentRolloutRef.current = selectedFlag.rollout_percentage || 5;
+    }
+  }, [selectedFlag]);
 
   const fetchFlags = async () => {
+    setIsRefreshing(true);
     try {
-      setLoading(true);
-      const res = await fetch("https://vane-ai.onrender.com/api/v1/feature_flags");
-      const data: FeatureFlag[] = await res.json();
-      setFlags(data);
-      if (data.length > 0) {
-        // Seçili bayrak varsa onu güncelle, yoksa ilkini seç
-        setSelectedFlag(prev => prev ? data.find(f => f.id === prev.id) || data[0] : data[0]);
+      const res = await fetch(`${apiUrl}/api/v1/feature_flags`);
+      if (res.ok) {
+        const data: FeatureFlag[] = await res.json();
+        setFlags(data);
+        if (data.length > 0 && !selectedFlag) {
+          setSelectedFlag(data[0]);
+          currentRolloutRef.current = data[0].rollout_percentage || 5;
+        } else if (selectedFlag) {
+          const updated = data.find((f) => f.id === selectedFlag.id);
+          if (updated) {
+            setSelectedFlag(updated);
+            currentRolloutRef.current = updated.rollout_percentage || 5;
+          }
+        }
       }
     } catch (err) {
-      console.error("Backend fetch error:", err);
+      console.error("API Fetch Error:", err);
     } finally {
-      setLoading(false);
+      setIsRefreshing(false);
     }
   };
 
@@ -76,329 +80,317 @@ export default function VaneAIDashboard() {
     fetchFlags();
   }, []);
 
-  const runSimulation = async (scenario: "critical_crash" | "latency_spike" | "healthy") => {
+  const stopSimulation = () => {
+    if (loopRef.current) {
+      clearInterval(loopRef.current);
+      loopRef.current = null;
+    }
+    setIsSimulating(false);
+  };
+
+  const triggerSimulation = async (type: "crash" | "latency" | "healthy") => {
     if (!selectedFlag) return;
+
+    if (currentRolloutRef.current >= 100 && type !== "crash") {
+      stopSimulation();
+      return;
+    }
+
+    let payload = {
+      feature_flag_id: selectedFlag.id,
+      error_rate: 0.04,
+      latency_p99: 115,
+      crash_count: 0,
+    };
+
+    if (type === "crash") {
+      payload = {
+        feature_flag_id: selectedFlag.id,
+        error_rate: 5.2,
+        latency_p99: 720,
+        crash_count: 94,
+      };
+      setTelemetry({
+        errorRate: 5.2,
+        p99Latency: 720,
+        activeCrashes: 94,
+        canarySample: "48.000 reqs",
+      });
+    } else if (type === "latency") {
+      payload = {
+        feature_flag_id: selectedFlag.id,
+        error_rate: 0.95,
+        latency_p99: 440,
+        crash_count: 0,
+      };
+      setTelemetry({
+        errorRate: 0.95,
+        p99Latency: 440,
+        activeCrashes: 0,
+        canarySample: "36.000 reqs",
+      });
+    } else {
+      setTelemetry({
+        errorRate: 0.02,
+        p99Latency: 95,
+        activeCrashes: 0,
+        canarySample: "55.000 reqs",
+      });
+    }
+
     try {
-      setSimulating(true);
-      const res = await fetch(`https://vane-ai.onrender.com/api/v1/feature_flags/${selectedFlag.id}/simulate_telemetry`, {
+      const res = await fetch(`${apiUrl}/api/v1/simulate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scenario })
+        body: JSON.stringify(payload),
       });
+
       const data = await res.json();
-      // Verileri tazele
-      await fetchFlags();
+      const timeStr = new Date().toLocaleTimeString();
+
+      // 1. YELLOW TIER: AUTONOMOUS REMEDIATION
+      if (data.tier === "yellow") {
+        setRemediation({
+          tier: "yellow",
+          rootCause: data.root_cause,
+          reasoning: data.reasoning,
+          diff: data.diff,
+          appliedAt: timeStr,
+        });
+
+        const nextRollout = Math.min(currentRolloutRef.current + 15, 100);
+        currentRolloutRef.current = nextRollout;
+
+        const patchedCode = (selectedFlag.code_context || "").replace(
+          "scores = [compute_embedding(item) for item in item_pool]",
+          "# Autonomous Hotfix Merged:\nscores = batch_compute_embeddings(item_pool, batch_size=64)"
+        );
+
+        setSelectedFlag((prev) => (prev ? { ...prev, rollout_percentage: nextRollout, code_context: patchedCode } : null));
+        setFlags((prev) =>
+          prev.map((f) => (f.id === selectedFlag.id ? { ...f, rollout_percentage: nextRollout, code_context: patchedCode } : f))
+        );
+
+        setLogs((prev) => [
+          `[${timeStr}] ⚡ AUTONOMOUS_SELF_HEAL (Risk Score: ${data.risk_score}/100)\n` +
+          `• Root Cause: ${data.root_cause}\n` +
+          `• Remediation: ${data.reasoning}\n` +
+          `• Autonomous Diff Applied:\n${data.diff}\n` +
+          `✓ Canary progression continuing without downtime...`,
+          ...prev,
+        ]);
+
+        setTimeout(() => {
+          setTelemetry((t) => ({ ...t, p99Latency: 110, errorRate: 0.03 }));
+        }, 1200);
+
+        if (nextRollout >= 100) {
+          stopSimulation();
+          setLogs((prev) => [
+            `[${timeStr}] 🏆 FULL_RELEASE: Flag successfully scaled to 100% rollout with zero downtime!`,
+            ...prev,
+          ]);
+        }
+
+      // 2. RED TIER: CRITICAL CIRCUIT BREAKER
+      } else if (data.tier === "red") {
+        stopSimulation();
+        setRemediation({
+          tier: "red",
+          rootCause: data.root_cause,
+          reasoning: data.reasoning,
+          diff: data.diff,
+          appliedAt: timeStr,
+        });
+
+        setLogs((prev) => [
+          `[${timeStr}] 🚨 CRITICAL_GUARDRAIL_HOLD (Risk Score: ${data.risk_score}/100)\n` +
+          `• Root Cause: ${data.root_cause}\n` +
+          `• Guardrail Policy: ${data.reasoning}\n` +
+          `! ALERT: Rollout halted. High-risk architectural change requires human engineer sign-off.`,
+          ...prev,
+        ]);
+
+        setSelectedFlag((prev) => (prev ? { ...prev, status: "investigating" } : null));
+        setFlags((prev) =>
+          prev.map((f) => (f.id === selectedFlag.id ? { ...f, status: "investigating" } : f))
+        );
+
+      // 3. GREEN TIER: NOMINAL PROGRESSION
+      } else {
+        const nextRollout = Math.min(currentRolloutRef.current + 15, 100);
+        currentRolloutRef.current = nextRollout;
+
+        setSelectedFlag((prev) => (prev ? { ...prev, rollout_percentage: nextRollout, status: "canary" } : null));
+        setFlags((prev) =>
+          prev.map((f) => (f.id === selectedFlag.id ? { ...f, rollout_percentage: nextRollout, status: "canary" } : f))
+        );
+
+        setLogs((prev) => [
+          `[${timeStr}] PROCEED_ROLLOUT (Risk Score: ${data.risk_score}/100): Telemetry healthy. Traffic scaled to ${nextRollout}%.`,
+          ...prev,
+        ]);
+
+        if (nextRollout >= 100) {
+          stopSimulation();
+          setLogs((prev) => [
+            `[${timeStr}] 🏆 FULL_RELEASE: Canary rollout successfully reached 100% target!`,
+            ...prev,
+          ]);
+        }
+      }
     } catch (err) {
-      console.error("Simulation error:", err);
-    } finally {
-      setSimulating(false);
+      console.error("Simulation Execution Error:", err);
     }
   };
 
-  const approveRollback = async () => {
-    if (!selectedFlag) return;
-    try {
-      setSimulating(true);
-      await fetchFetchApproval(selectedFlag.id);
-      await fetchFlags();
-    } catch (err) {
-      console.error("Approval error:", err);
-    } finally {
-      setSimulating(false);
-    }
+  const startSimulation = () => {
+    if (!selectedFlag || (remediation && remediation.tier === "red")) return;
+    if (currentRolloutRef.current >= 100) return;
+
+    setIsSimulating(true);
+
+    loopRef.current = setInterval(() => {
+      if (currentRolloutRef.current >= 100) {
+        stopSimulation();
+        return;
+      }
+
+      const rand = Math.random();
+      if (rand < 0.6) {
+        triggerSimulation("healthy");
+      } else if (rand < 0.9) {
+        triggerSimulation("latency");
+      } else {
+        triggerSimulation("crash");
+      }
+    }, 4500);
   };
 
-  const fetchFetchApproval = async (id: number) => {
-    return fetch(`https://vane-ai.onrender.com/api/v1/feature_flags/${id}/approve_rollback`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" }
+  const handleApproveCriticalPatch = () => {
+    setIsApplyingPatch(true);
+    setTimeout(() => {
+      setIsApplyingPatch(false);
+
+      const fixedCode = (selectedFlag?.code_context || "") + "\n// Safe bounds verification merged by engineer.";
+      setSelectedFlag((prev) => (prev ? { ...prev, status: "canary", code_context: fixedCode } : null));
+      setFlags((prev) =>
+        prev.map((f) => (f.id === selectedFlag?.id ? { ...f, status: "canary", code_context: fixedCode } : f))
+      );
+
+      setRemediation((prev) => (prev ? { ...prev, tier: "nominal" } : null));
+      setTelemetry({
+        errorRate: 0.02,
+        p99Latency: 105,
+        activeCrashes: 0,
+        canarySample: "30.000 reqs",
+      });
+
+      setLogs((prev) => [
+        `[${new Date().toLocaleTimeString()}] ✓ CRITICAL_PATCH_APPROVED: Engineer approved patch. Hotfix deployed to production. Resuming canary rollout...`,
+        ...prev,
+      ]);
+
+      startSimulation();
+    }, 1500);
+  };
+
+  // Kırmızı Durumda Yamayı Reddetme & Flag'i Öldürme (Kill Switch)
+  const handleRejectCriticalPatch = () => {
+    stopSimulation();
+    currentRolloutRef.current = 0;
+
+    // Flag'i KILLED durumuna çek ve trafiği sıfırla
+    setSelectedFlag((prev) => (prev ? { ...prev, status: "killed", rollout_percentage: 0 } : null));
+    setFlags((prev) =>
+      prev.map((f) => (f.id === selectedFlag?.id ? { ...f, status: "killed", rollout_percentage: 0 } : f))
+    );
+
+    setRemediation((prev) => (prev ? { ...prev, tier: "nominal", diff: null } : null));
+    setTelemetry({
+      errorRate: 0.0,
+      p99Latency: 85,
+      activeCrashes: 0,
+      canarySample: "0 reqs (Traffic Isolated)",
     });
+
+    const timeStr = new Date().toLocaleTimeString();
+    setLogs((prev) => [
+      `[${timeStr}] 🛑 RELEASE_KILLED_BY_ENGINEER: AI remediation patch rejected.\n` +
+      `• Action: Circuit breaker enforced. Traffic cut to 0%.\n` +
+      `• Status: Flag '${selectedFlag?.key}' marked as KILLED.\n` +
+      `• Jira/Incident: Escalated to engineering team for manual investigation.\n` +
+      `$ vanectl flag kill ${selectedFlag?.key} --reason "AI patch rejected during critical failure"`,
+      ...prev,
+    ]);
   };
 
-  const latestAudit = selectedFlag?.agent_audits?.[selectedFlag.agent_audits.length - 1];
-  const latestMetric = selectedFlag?.canary_metrics?.[selectedFlag.canary_metrics.length - 1];
+  const handleResetFlag = () => {
+    if (!selectedFlag) return;
+    currentRolloutRef.current = 5;
+    setSelectedFlag((prev) => (prev ? { ...prev, status: "canary", rollout_percentage: 5 } : null));
+    setFlags((prev) =>
+      prev.map((f) => (f.id === selectedFlag.id ? { ...f, status: "canary", rollout_percentage: 5 } : f))
+    );
+    setTelemetry({
+      errorRate: 0.04,
+      p99Latency: 110,
+      activeCrashes: 0,
+      canarySample: "10.000 reqs",
+    });
+    setRemediation(null);
+  };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Top Navbar */}
-      <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-            <Activity className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-lg tracking-tight">VaneAI</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Enterprise</span>
-            </div>
-            <p className="text-xs text-slate-400">Autonomous Canary Release & Guardrail Engine</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-[#04070c] text-slate-100 flex flex-col font-sans">
+      <Navbar org={org} onRefresh={fetchFlags} isRefreshing={isRefreshing} />
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 text-xs text-slate-400 bg-slate-900 px-3 py-1.5 rounded-md border border-slate-800">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Tenant: <strong className="text-slate-200">Hulu (US-East Cluster)</strong>
-          </div>
-          <button 
-            onClick={fetchFlags}
-            className="p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
-            title="Refresh"
-          >
-            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-          </button>
-        </div>
-      </header>
+      <div className="flex flex-1 overflow-hidden">
+        <FlagList
+          flags={flags}
+          selectedFlag={selectedFlag}
+          onSelect={(f) => {
+            stopSimulation();
+            setSelectedFlag(f);
+            currentRolloutRef.current = f.rollout_percentage || 5;
+            setRemediation(null);
+          }}
+          onOpenModal={() => setIsModalOpen(true)}
+        />
 
-      {/* Main Content */}
-      <main className="flex-1 grid grid-cols-12 gap-6 p-6 max-w-7xl mx-auto w-full">
-        {/* Left Column: Feature Flag List */}
-        <section className="col-span-4 flex flex-col gap-3">
-          <div className="flex items-center justify-between mb-1">
-            <h2 className="text-sm font-semibold tracking-wide uppercase text-slate-400 flex items-center gap-2">
-              <Layers className="h-4 w-4 text-emerald-400" />
-              Active Canary Flags
-            </h2>
-            <span className="text-xs text-slate-500">{flags.length} Managed</span>
-          </div>
+        <main className="flex-1 overflow-y-auto p-6 space-y-6">
+          <TelemetryPanel
+            flag={selectedFlag}
+            telemetry={telemetry}
+            isSimulating={isSimulating}
+            onStartSimulation={startSimulation}
+            onStopSimulation={stopSimulation}
+            onResetFlag={handleResetFlag}
+            onTriggerScenario={triggerSimulation}
+          />
 
-          <div className="flex flex-col gap-2.5">
-            {flags.map((flag) => {
-              const isSelected = selectedFlag?.id === flag.id;
-              const isKilled = flag.status.includes("killed");
+          <CodeContextViewer
+            flag={selectedFlag}
+            remediation={remediation}
+            onApproveCriticalPatch={handleApproveCriticalPatch}
+            onRejectCriticalPatch={handleRejectCriticalPatch}
+            isApplying={isApplyingPatch}
+          />
 
-              return (
-                <div
-                  key={flag.id}
-                  onClick={() => setSelectedFlag(flag)}
-                  className={`p-4 rounded-xl border cursor-pointer transition-all ${
-                    isSelected 
-                      ? "bg-slate-900 border-emerald-500/50 shadow-lg shadow-emerald-950/20" 
-                      : "bg-slate-900/40 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/70"
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="font-medium text-sm text-slate-100 leading-snug">{flag.name}</h3>
-                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded ${
-                      isKilled 
-                        ? "bg-rose-500/20 text-rose-400 border border-rose-500/30" 
-                        : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                    }`}>
-                      {isKilled ? "OFF (KILLED)" : `${flag.rollout_percentage}% ROLLOUT`}
-                    </span>
-                  </div>
+          <AuditTrail logs={logs} />
+        </main>
+      </div>
 
-                  <p className="text-xs text-slate-400 line-clamp-1 mb-3">{flag.description}</p>
-
-                  {/* Rollout Progress Bar */}
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full transition-all duration-500 ${isKilled ? 'bg-rose-500' : 'bg-emerald-400'}`}
-                      style={{ width: `${flag.rollout_percentage}%` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Right Column: Telemetry & Autonomous Guardian Agent */}
-        <section className="col-span-8 flex flex-col gap-6">
-          {selectedFlag ? (
-            <>
-              {/* Flag Header Card */}
-              <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 flex flex-col gap-4">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h1 className="text-xl font-bold text-white">{selectedFlag.name}</h1>
-                      <code className="text-xs bg-slate-950 px-2 py-0.5 rounded text-emerald-400 border border-slate-800">
-                        {selectedFlag.key}
-                      </code>
-                    </div>
-                    <p className="text-xs text-slate-400 mt-1">{selectedFlag.description}</p>
-                  </div>
-
-                  <div className="text-right">
-                    <span className="text-xs text-slate-400 block">Traffic Allocation</span>
-                    <span className="text-2xl font-black text-emerald-400">
-                      {selectedFlag.rollout_percentage}%
-                    </span>
-                  </div>
-                </div>
-
-                {/* Simulation Harness Controls */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                      <Flame className="h-3.5 w-3.5 text-amber-400" />
-                      Simulate Telemetry Injection (Canary Traffic)
-                    </span>
-                    {simulating && (
-                      <span className="text-xs text-emerald-400 flex items-center gap-1.5 animate-pulse">
-                        <Activity className="h-3.5 w-3.5 animate-spin" /> Evaluating with Guardian Agent...
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-3">
-                    <button
-                      disabled={simulating}
-                      onClick={() => runSimulation("critical_crash")}
-                      className="px-3 py-2.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-medium flex items-center justify-center gap-2 transition disabled:opacity-50"
-                    >
-                      <ShieldAlert className="h-4 w-4 text-rose-400" />
-                      1. Critical Buffer Crash (Auto-Rollback)
-                    </button>
-
-                    <button
-                      disabled={simulating}
-                      onClick={() => runSimulation("latency_spike")}
-                      className="px-3 py-2.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-medium flex items-center justify-center gap-2 transition disabled:opacity-50"
-                    >
-                      <Clock className="h-4 w-4 text-amber-400" />
-                      2. Elevated Latency Spike (Guardrail Gate)
-                    </button>
-
-                    <button
-                      disabled={simulating}
-                      onClick={() => runSimulation("healthy")}
-                      className="px-3 py-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-medium flex items-center justify-center gap-2 transition disabled:opacity-50"
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                      3. Healthy Traffic (Proceed)
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* HUMAN-IN-THE-LOOP GUARDRAIL INTERCEPTOR MODAL/BANNER */}
-              {latestAudit && latestAudit.execution_status === "GUARDRAIL_BLOCKED" && (
-                <div className="bg-amber-950/40 border-2 border-amber-500/60 rounded-2xl p-5 flex items-start justify-between gap-4 shadow-xl shadow-amber-950/20">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      <AlertTriangle className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-900/50 px-2 py-0.5 rounded border border-amber-700/50">
-                          Guardrail Threshold Triggered
-                        </span>
-                        <span className="text-xs text-slate-300 font-semibold">Human-in-the-Loop Required</span>
-                      </div>
-                      <p className="text-sm font-medium text-slate-200 mt-1.5 leading-snug">
-                        {latestAudit.reasoning}
-                      </p>
-                      <p className="text-xs text-slate-400 mt-1">
-                        Ajan riski tarttı ve otonom kill-switch'i bilinçli olarak bloke etti (Risk Skoru: {latestAudit.risk_score}/100). Karar mühendis onayına sunuldu.
-                      </p>
-                    </div>
-                  </div>
-
-                  <button
-                    disabled={simulating}
-                    onClick={approveRollback}
-                    className="shrink-0 px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-lg transition flex items-center gap-2 shadow-lg shadow-amber-500/20 disabled:opacity-50"
-                  >
-                    <UserCheck className="h-4 w-4" />
-                    Approve & Execute Rollback (0%)
-                  </button>
-                </div>
-              )}
-
-              {/* AUTONOMOUS ZERO-TOUCH EXECUTION BANNER */}
-              {latestAudit && latestAudit.action_taken === "AUTONOMOUS_ROLLBACK" && (
-                <div className="bg-rose-950/40 border border-rose-500/40 rounded-2xl p-5 flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
-                    <ShieldAlert className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-rose-400 bg-rose-900/50 px-2 py-0.5 rounded border border-rose-700/50">
-                        Zero-Touch Autonomous Rollback Executed
-                      </span>
-                      <span className="text-xs text-slate-400">Risk Score: {latestAudit.risk_score} (Immediate Urgency)</span>
-                    </div>
-                    <p className="text-sm text-slate-200 mt-1.5 leading-snug">{latestAudit.reasoning}</p>
-                    <code className="text-xs font-mono text-rose-300/80 bg-slate-950 px-2 py-1 rounded block mt-2 border border-slate-800">
-                      $ {latestAudit.payload}
-                    </code>
-                  </div>
-                </div>
-              )}
-
-              {/* Live Telemetry Metrics Stream */}
-              {latestMetric && (
-                <div className="grid grid-cols-4 gap-3">
-                  <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                    <span className="text-[11px] font-medium text-slate-400 block">Error Rate</span>
-                    <span className={`text-xl font-bold mt-1 block ${latestMetric.error_rate > 5 ? 'text-rose-400' : 'text-emerald-400'}`}>
-                      {latestMetric.error_rate}%
-                    </span>
-                  </div>
-                  <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                    <span className="text-[11px] font-medium text-slate-400 block">p99 Latency</span>
-                    <span className={`text-xl font-bold mt-1 block ${latestMetric.latency_p99 > 500 ? 'text-amber-400' : 'text-slate-200'}`}>
-                      {latestMetric.latency_p99} ms
-                    </span>
-                  </div>
-                  <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                    <span className="text-[11px] font-medium text-slate-400 block">Active Crashes</span>
-                    <span className={`text-xl font-bold mt-1 block ${latestMetric.crash_count > 0 ? 'text-rose-400' : 'text-slate-200'}`}>
-                      {latestMetric.crash_count}
-                    </span>
-                  </div>
-                  <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                    <span className="text-[11px] font-medium text-slate-400 block">Canary Sample</span>
-                    <span className="text-xl font-bold text-slate-200 mt-1 block">
-                      {latestMetric.sample_size.toLocaleString()} reqs
-                    </span>
-                  </div>
-                </div>
-              )}
-
-              {/* Terminal Logs & Reasoning Stream */}
-              <div className="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col gap-2">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <span className="text-xs font-mono text-slate-400 flex items-center gap-2">
-                    <Terminal className="h-3.5 w-3.5 text-emerald-400" />
-                    Agent Decision & Audit Trail (Harness Engine)
-                  </span>
-                  <span className="text-[11px] text-slate-500 font-mono">Model: Groq / openai/gpt-oss-20b</span>
-                </div>
-
-                <div className="font-mono text-xs text-slate-300 max-h-48 overflow-y-auto flex flex-col gap-1.5 p-1">
-                  {selectedFlag.agent_audits.length === 0 ? (
-                    <span className="text-slate-600 italic">No telemetry events evaluated yet. Trigger a scenario above.</span>
-                  ) : (
-                    selectedFlag.agent_audits.slice().reverse().map((audit) => (
-                      <div key={audit.id} className="border-b border-slate-900 pb-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-slate-500">[{new Date(audit.created_at).toLocaleTimeString()}]</span>
-                          <span className={`font-bold ${
-                            audit.action_taken === "AUTONOMOUS_ROLLBACK" ? "text-rose-400" :
-                            audit.action_taken === "HUMAN_APPROVAL_REQUIRED" ? "text-amber-400" : "text-emerald-400"
-                          }`}>
-                            {audit.action_taken}
-                          </span>
-                          <span className="text-slate-400 text-[11px]">Status: {audit.execution_status} (Risk: {audit.risk_score}/100)</span>
-                        </div>
-                        <p className="text-slate-300 mt-0.5 ml-4">{audit.reasoning}</p>
-                        <p className="text-slate-500 text-[11px] ml-4 font-mono">$ {audit.payload}</p>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="h-full flex items-center justify-center text-slate-500">
-              Select a flag from the left to view telemetry and release guardian controls.
-            </div>
-          )}
-        </section>
-      </main>
+      <ImportFlagModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreated={(newFlag) => {
+          setFlags((prev) => [newFlag, ...prev]);
+          setSelectedFlag(newFlag);
+          currentRolloutRef.current = newFlag.rollout_percentage || 5;
+        }}
+        organizationId={org?.id}
+      />
     </div>
   );
 }
