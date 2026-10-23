@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feature_flag: one
+  risk_score: 1
+  risk_tier: MyString
+  action_taken: MyString
+  execution_status: MyString
+  reasoning: MyText
+  payload: MyText
+
+two:
+  feature_flag: two
+  risk_score: 1
+  risk_tier: MyString
+  action_taken: MyString
+  execution_status: MyString
+  reasoning: MyText
+  payload: MyText

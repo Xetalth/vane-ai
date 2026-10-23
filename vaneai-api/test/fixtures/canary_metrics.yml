@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feature_flag: one
+  error_rate: 1.5
+  latency_p99: 1
+  crash_count: 1
+  sample_size: 1
+  logs_payload: MyText
+
+two:
+  feature_flag: two
+  error_rate: 1.5
+  latency_p99: 1
+  crash_count: 1
+  sample_size: 1
+  logs_payload: MyText
