@@ -58,7 +58,7 @@ export default function VaneAIDashboard() {
   const fetchFlags = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/v1/feature_flags");
+      const res = await fetch("https://vane-ai.onrender.com/api/v1/feature_flags");
       const data: FeatureFlag[] = await res.json();
       setFlags(data);
       if (data.length > 0) {
@@ -80,7 +80,7 @@ export default function VaneAIDashboard() {
     if (!selectedFlag) return;
     try {
       setSimulating(true);
-      const res = await fetch(`http://localhost:3000/api/v1/feature_flags/${selectedFlag.id}/simulate_telemetry`, {
+      const res = await fetch(`https://vane-ai.onrender.com/api/v1/feature_flags/${selectedFlag.id}/simulate_telemetry`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ scenario })
@@ -109,7 +109,7 @@ export default function VaneAIDashboard() {
   };
 
   const fetchFetchApproval = async (id: number) => {
-    return fetch(`http://localhost:3000/api/v1/feature_flags/${id}/approve_rollback`, {
+    return fetch(`https://vane-ai.onrender.com/api/v1/feature_flags/${id}/approve_rollback`, {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });
