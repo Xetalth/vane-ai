@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_19_112942) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_23_114454) do
   create_table "agent_audits", force: :cascade do |t|
     t.integer "feature_flag_id", null: false
     t.integer "risk_score"
@@ -45,8 +45,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_112942) do
     t.integer "rollout_percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "organization_id", null: false
+    t.string "connected_repo"
+    t.text "code_context"
+    t.index ["organization_id"], name: "index_feature_flags_on_organization_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "cluster_region"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.integer "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
   add_foreign_key "agent_audits", "feature_flags"
   add_foreign_key "canary_metrics", "feature_flags"
+  add_foreign_key "feature_flags", "organizations"
+  add_foreign_key "users", "organizations"
 end

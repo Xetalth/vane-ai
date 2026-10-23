@@ -1,7 +1,5 @@
 class FeatureFlag < ApplicationRecord
-  has_many :canary_metrics, dependent: :destroy
-  has_many :agent_audits, dependent: :destroy
+  belongs_to :organization, optional: true
 
-  validates :key, presence: true, uniqueness: true
-  validates :name, presence: true
-end
+  validates :name, :key, presence: true
+end 
