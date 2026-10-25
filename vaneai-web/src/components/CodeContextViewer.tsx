@@ -1,150 +1,217 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FeatureFlag } from "@/types";
-
-interface RemediationState {
-  tier: "yellow" | "red" | "nominal";
-  rootCause: string;
-  reasoning: string;
-  diff: string | null;
-  appliedAt?: string;
-}
 
 interface Props {
   flag: FeatureFlag | null;
-  remediation: RemediationState | null;
-  onApproveCriticalPatch: () => void;
-  onRejectCriticalPatch: () => void; // <-- Yeni ret fonksiyonu
-  isApplying: boolean;
+  aiRemediationCode?: string | null;
+  tier?: "yellow" | "red" | "nominal" | null;
 }
 
 export default function CodeContextViewer({
   flag,
-  remediation,
-  onApproveCriticalPatch,
-  onRejectCriticalPatch,
-  isApplying,
+  aiRemediationCode,
+  tier = "nominal",
 }: Props) {
-  if (!flag) return null;
+  const [isApplying, setIsApplying] = useState(false);
+  const [successUrl, setSuccessUrl] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const isCritical = remediation?.tier === "red";
-  const isAutonomous = remediation?.tier === "yellow";
+  if (!flag) {
+    return (
+      <div className="panel-surface flex h-48 items-center justify-center font-mono text-xs text-slate-500">
+        No microservice context loaded. Select an active flag from the inventory.
+      </div>
+    );
+  }
+
+  const getGithubToken = () => {
+    if (typeof document === "undefined") return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; gh_token=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+    return null;
+  };
+
+  const handleApplyHotfix = async () => {
+    const token = getGithubToken();
+    if (!token) {
+      alert("GitHub access token not found. Please connect your GitHub account via the Import Flag modal first.");
+      return;
+    }
+
+    if (!aiRemediationCode) {
+      alert("No autonomous remediation code generated to commit.");
+      return;
+    }
+
+    setIsApplying(true);
+    setErrorMsg(null);
+    setSuccessUrl(null);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+    try {
+      const res = await fetch(`${apiUrl}/api/v1/remediations/apply`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-GitHub-Token": token,
+        },
+        body: JSON.stringify({
+          feature_flag_id: flag.id,
+          file_path: "app/service.py",
+          patched_code: aiRemediationCode,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to commit hotfix to GitHub.");
+      }
+
+      const prUrl = data.data?.pr_url;
+      if (prUrl) {
+        setSuccessUrl(prUrl);
+        window.open(prUrl, "_blank");
+      }
+    } catch (err: any) {
+      console.error("Hotfix deployment error:", err);
+      setErrorMsg(err.message || "An unexpected error occurred during hotfix deployment.");
+    } finally {
+      setIsApplying(false);
+    }
+  };
+
+  const isRed = tier === "red";
+  const isYellow = tier === "yellow";
 
   return (
-    <div className="rounded-2xl border border-slate-800/80 bg-[#090d16]/90 p-5 backdrop-blur-md">
-      {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div className="flex items-center gap-2">
+    <div className="panel-surface">
+      {/* Üst Başlık ve Bağlı Depo Bilgisi */}
+      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="flex items-center gap-3">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
             Connected Repository & Source Context
           </span>
-          <span className="rounded bg-slate-800 px-2 py-0.5 font-mono text-[11px] text-teal-400">
-            {flag.connected_repo || "repo/unassigned"}
+          <span className="rounded-full border border-slate-700 bg-slate-900/60 px-2.5 py-0.5 font-mono text-[11px] text-slate-300">
+            {flag.connected_repo || "github.com/acme/unassigned-service"}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
-          {isAutonomous && (
-            <span className="flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-amber-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-              Autonomous Self-Healing Active ({remediation.appliedAt})
-            </span>
+          {successUrl && (
+            <a
+              href={successUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-emerald-400 underline hover:text-emerald-300"
+            >
+              View Opened PR ↗
+            </a>
           )}
-
-          {isCritical && (
-            <span className="flex items-center gap-1.5 rounded-full border border-rose-500/50 bg-rose-500/15 px-2.5 py-0.5 text-[10px] font-semibold text-rose-300 animate-pulse">
-              <span className="h-1.5 w-1.5 rounded-full bg-rose-400" />
-              Action Required: Human-in-the-Loop Review
-            </span>
-          )}
-
-          {!remediation && (
-            <span className="text-[10px] font-mono text-slate-500">Standby (Nominal Baseline)</span>
-          )}
+          <span className="text-[11px] font-mono text-slate-500">
+            {isRed
+              ? "Critical Incident Active"
+              : isYellow
+              ? "Autonomous Self-Healing Active"
+              : "Standby (Nominal Baseline)"}
+          </span>
         </div>
       </div>
 
-      {/* Remediation Summary Card */}
-      {remediation && remediation.tier !== "nominal" && (
-        <div
-          className={`mt-3 rounded-lg border p-3 text-xs font-mono ${
-            isCritical
-              ? "border-rose-500/30 bg-rose-950/20 text-rose-300"
-              : "border-amber-500/30 bg-amber-950/20 text-amber-200"
-          }`}
-        >
-          <div className="font-semibold uppercase tracking-wide">
-            {isCritical ? "🚨 CRITICAL ARCHITECTURAL REMEDIATION PENDING" : "⚡ AUTONOMOUS REMEDIATION APPLIED"}
-          </div>
-          <div className="mt-1 text-slate-300">
-            <span className="text-slate-400">Root Cause: </span>
-            {remediation.rootCause}
-          </div>
-          <div className="mt-0.5 text-slate-300">
-            <span className="text-slate-400">Agent Reasoning: </span>
-            {remediation.reasoning}
-          </div>
+      {errorMsg && (
+        <div className="mt-2 rounded-lg border border-rose-500/30 bg-rose-950/20 p-2.5 text-xs text-rose-300">
+          {errorMsg}
         </div>
       )}
 
-      {/* Code Blocks */}
-      <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Active Source Code */}
+      {/* Kod Karşılaştırma Izgarası */}
+      <div className="mt-3 grid grid-cols-2 gap-4">
+        {/* Canlı Üretim Kodu */}
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[11px] font-medium text-slate-400">Active Production Code</span>
-            <span className="text-[10px] font-mono text-slate-500">Live Branch Mirror</span>
+          <div className="mb-1.5 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Active Production Code</span>
+            <span className="font-mono text-slate-500">Live Branch Mirror</span>
           </div>
-          <pre className="h-48 overflow-x-auto rounded-xl border border-slate-800 bg-[#06090e] p-3 font-mono text-xs text-slate-300 leading-relaxed">
-            <code>{flag.code_context || "// No source code mapped."}</code>
+          <pre className="h-56 overflow-x-auto rounded-xl border border-slate-800 bg-[#0a0e17] p-3.5 font-mono text-xs leading-relaxed text-slate-300">
+            <code>
+              {flag.code_context ||
+                `// No code snippet mapped for this release.\n// Please configure entrypoint context in canary flag settings.`}
+            </code>
           </pre>
         </div>
 
-        {/* AI Diff Panel */}
+        {/* AI Otonom Hotfix Diff Penceresi (Sarı ve Kırmızı Durum Renkleri) */}
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[11px] font-medium text-slate-400">
-              {isCritical ? "Pending Critical Diff" : "AI Self-Healing Hotfix Engine"}
-            </span>
-
-            {isCritical && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={onRejectCriticalPatch}
-                  disabled={isApplying}
-                  className="rounded-md border border-rose-500/40 bg-rose-950/40 px-2 py-1 text-[11px] font-semibold text-rose-300 hover:bg-rose-900/60 transition-colors disabled:opacity-50"
-                >
-                  ✕ Reject & Kill Release
-                </button>
-                <button
-                  onClick={onApproveCriticalPatch}
-                  disabled={isApplying}
-                  className="rounded-md bg-emerald-600 px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-emerald-500 transition-colors disabled:opacity-50"
-                >
-                  {isApplying ? "Deploying..." : "✓ Approve & Merge"}
-                </button>
-              </div>
+          <div className="mb-1.5 flex items-center justify-between text-[11px] text-slate-400">
+            <span>AI Self-Healing Hotfix Engine</span>
+            {isRed && (
+              <span className="rounded bg-rose-500/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-rose-400 border border-rose-500/20">
+                CRITICAL DIFF GENERATED
+              </span>
+            )}
+            {isYellow && (
+              <span className="rounded bg-amber-500/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-amber-400 border border-amber-500/20">
+                AUTONOMOUS OPTIMIZATION DIFF
+              </span>
             )}
           </div>
-
           <pre
-            className={`h-48 overflow-x-auto rounded-xl border p-3 font-mono text-xs leading-relaxed ${
-              isCritical
-                ? "border-rose-500/40 bg-[#0c0608] text-rose-300"
-                : isAutonomous
-                ? "border-amber-500/30 bg-[#0c0a06] text-amber-300"
-                : "border-slate-800 bg-[#06090e] text-slate-500"
+            className={`h-56 overflow-x-auto rounded-xl border p-3.5 font-mono text-xs leading-relaxed transition-all duration-300 ${
+              isRed
+                ? "border-rose-500/40 bg-rose-950/15 text-rose-200"
+                : isYellow
+                ? "border-amber-500/40 bg-amber-950/15 text-amber-200"
+                : "border-slate-800 bg-[#0a0e17] text-slate-500"
             }`}
           >
             <code>
-              {remediation?.diff
-                ? remediation.diff
-                : "// System healthy. Realtime diff generator in standby mode.\n// Anomalies will trigger contextual patches here automatically."}
+              {aiRemediationCode ||
+                `// System healthy. Realtime diff generator in standby mode.\n// Anomalies will trigger contextual patches here automatically.`}
             </code>
           </pre>
         </div>
       </div>
+
+      {/* Sadece Kırmızı Durumda Çıkan Onay ve PR Açma Butonu */}
+      {isRed && (
+        <div className="mt-3 flex items-center justify-between rounded-xl border border-rose-500/30 bg-rose-950/20 px-4 py-3">
+          <div className="text-xs text-rose-200">
+            <span className="font-semibold text-rose-400">Action Required:</span> Autonomous patch generated to arrest
+            canary failure. Deploying creates a dedicated hotfix branch and PR.
+          </div>
+          <button
+            onClick={handleApplyHotfix}
+            disabled={isApplying}
+            className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-emerald-500 disabled:opacity-50"
+          >
+            {isApplying ? (
+              <>
+                <span className="h-2 w-2 rounded-full bg-white animate-ping" />
+                Committing to GitHub...
+              </>
+            ) : (
+              "Approve & Deploy Hotfix PR"
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* Sarı Durumda Çıkan Bilgilendirme Çubuğu (Butonsuz, Kendiliğinden İlerler) */}
+      {isYellow && (
+        <div className="mt-3 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-950/20 px-4 py-2.5">
+          <div className="text-xs text-amber-200 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+            <span>
+              <strong className="text-amber-400">Self-Healing In Progress:</strong> Low-risk latency patch committed to branch. Canary traffic expanding seamlessly.
+            </span>
+          </div>
+          <span className="font-mono text-[11px] text-amber-400/80">Zero Downtime Applied</span>
+        </div>
+      )}
     </div>
   );
 }

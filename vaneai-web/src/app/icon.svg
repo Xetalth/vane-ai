@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#04070c" />
+  <rect x="1" y="1" width="30" height="30" rx="7" stroke="#1e293b" stroke-width="1.5" />
+  
+  <!-- Vane Kanat / Guardrail Şekli -->
+  <path d="M7 8L16 24L25 8H19.5L16 16.5L12.5 8H7Z" fill="url(#vane-gradient)" />
+  
+  <!-- AI Core Nabız Noktası -->
+  <circle cx="16" cy="11" r="2.5" fill="#34d399" />
+  
+  <defs>
+    <linearGradient id="vane-gradient" x1="7" y1="8" x2="25" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10b981" />
+      <stop offset="0.5" stop-color="#06b6d4" />
+      <stop offset="1" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+</svg>
