@@ -70,9 +70,18 @@ export default function ImportFlagModal({
 
   const handleConnectGithub = () => {
     const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
-    const origin = typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
-    const redirectUri = encodeURIComponent(`${origin}/api/auth/github/callback`);
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=repo&prompt=select_account`;
+    if (!clientId) {
+      setErrorMsg("GitHub bağlantısı yapılandırılmamış. Vercel'de NEXT_PUBLIC_GITHUB_CLIENT_ID değişkenini tanımlayın.");
+      return;
+    }
+
+    const redirectUri = `${window.location.origin}/api/auth/github/callback`;
+    const params = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      scope: "repo",
+    });
+    window.location.assign(`https://github.com/login/oauth/authorize?${params.toString()}`);
   };
 
   const handleDisconnectGithub = async () => {

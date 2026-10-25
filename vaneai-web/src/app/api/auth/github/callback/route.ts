@@ -11,6 +11,11 @@ export async function GET(request: NextRequest) {
   const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
+  if (!clientId || !clientSecret) {
+    console.error("GitHub OAuth is missing NEXT_PUBLIC_GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET.");
+    return NextResponse.redirect(new URL("/?github_error=oauth_not_configured", request.url));
+  }
+
   try {
     const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
