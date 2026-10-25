@@ -70,7 +70,8 @@ export default function ImportFlagModal({
 
   const handleConnectGithub = () => {
     const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
-    const redirectUri = encodeURIComponent("http://localhost:3000/api/auth/github/callback");
+    const origin = typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
+    const redirectUri = encodeURIComponent(`${origin}/api/auth/github/callback`);
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=repo&prompt=select_account`;
   };
 
