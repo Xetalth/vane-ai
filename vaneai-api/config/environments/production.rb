@@ -77,7 +77,7 @@ Rails.application.configure do
 
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
-  config.hosts << /.*\.onrender\.com/
+  config.hosts.clear
   config.require_master_key = false
   config.secret_key_base = ENV["SECRET_KEY_BASE"] || "da7b4e9f8a3c2d1e0f5b6a7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e"
 
