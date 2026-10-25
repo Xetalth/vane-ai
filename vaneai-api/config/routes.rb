@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post "auth/login", to: "auth#login"
       resources :feature_flags, only: [:index, :create, :show, :update]
       post "simulate", to: "simulations#create"
+      post "remediations/apply", to: "remediations#apply"
     end
   end
 end

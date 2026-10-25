@@ -1,24 +1,39 @@
 module Api
   module V1
     class FeatureFlagsController < ApplicationController
-      skip_before_action :verify_authenticity_token, raise: false
-
       def index
-        if params[:organization_id].present?
-          @flags = FeatureFlag.where(organization_id: params[:organization_id]).order(created_at: :desc)
-        else
-          @flags = FeatureFlag.all.order(created_at: :desc)
-        end
+        @flags = FeatureFlag.all.order(created_at: :desc)
         render json: @flags
       end
 
+      def show
+        @flag = FeatureFlag.find(params[:id])
+        render json: @flag
+      end
+
       def create
-        @flag = FeatureFlag.new(feature_flag_params)
-        @flag.status ||= "canary"
-        @flag.traffic_allocation ||= 5
+        # Organization yoksa oluşturur veya ilkini bağlar
+        org = Organization.find_by(id: feature_flag_params[:organization_id]) || 
+              Organization.first_or_create!(name: "Acme Cloud", slug: "acme-cloud")
+
+        # traffic_allocation veya rollout_percentage uyuşmazlığını önlemek için temiz parametreler
+        safe_params = feature_flag_params.except(:organization_id)
+        @flag = FeatureFlag.new(safe_params)
+        @flag.organization = org
 
         if @flag.save
           render json: @flag, status: :created
+        else
+          render json: { errors: @flag.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
+      end
+
+      def update
+        @flag = FeatureFlag.find(params[:id])
+        if @flag.update(feature_flag_params)
+          render json: @flag
         else
           render json: { errors: @flag.errors.full_messages }, status: :unprocessable_entity
         end
@@ -28,9 +43,13 @@ module Api
 
       def feature_flag_params
         params.require(:feature_flag).permit(
-          :name, :key, :description, :environment, 
-          :rollout_percentage, :status, :organization_id, 
-          :connected_repo, :code_context
+          :organization_id,
+          :name,
+          :key,
+          :connected_repo,
+          :code_context,
+          :rollout_percentage,
+          :status
         )
       end
     end
