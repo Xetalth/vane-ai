@@ -26,6 +26,7 @@ export default function Home() {
   const [flags, setFlags] = useState<FeatureFlag[]>([]);
   const [selectedFlag, setSelectedFlag] = useState<FeatureFlag | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [flagsError, setFlagsError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [telemetry, setTelemetry] = useState<TelemetryData>({
@@ -53,25 +54,37 @@ export default function Home() {
 
   const fetchFlags = async () => {
     setIsRefreshing(true);
+    setFlagsError(null);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60_000);
+
     try {
-      const res = await fetch(`${apiUrl}/api/v1/feature_flags`);
-      if (res.ok) {
-        const data: FeatureFlag[] = await res.json();
-        setFlags(data);
-        if (data.length > 0 && !selectedFlag) {
-          setSelectedFlag(data[0]);
-          currentRolloutRef.current = data[0].rollout_percentage || 5;
-        } else if (selectedFlag) {
-          const updated = data.find((f) => f.id === selectedFlag.id);
-          if (updated) {
-            setSelectedFlag(updated);
-            currentRolloutRef.current = updated.rollout_percentage || 5;
-          }
+      const res = await fetch(`${apiUrl}/api/v1/feature_flags`, { signal: controller.signal });
+      if (!res.ok) {
+        throw new Error(`Feature flags request failed with status ${res.status}`);
+      }
+
+      const data: FeatureFlag[] = await res.json();
+      setFlags(data);
+      if (data.length > 0 && !selectedFlag) {
+        setSelectedFlag(data[0]);
+        currentRolloutRef.current = data[0].rollout_percentage || 5;
+      } else if (selectedFlag) {
+        const updated = data.find((f) => f.id === selectedFlag.id);
+        if (updated) {
+          setSelectedFlag(updated);
+          currentRolloutRef.current = updated.rollout_percentage || 5;
         }
       }
     } catch (err) {
       console.error("API Fetch Error:", err);
+      setFlagsError(
+        err instanceof Error && err.name === "AbortError"
+          ? "The API did not respond within 60 seconds. Check the Render service and try again."
+          : "Could not load feature flags. Check the API service and try again."
+      );
     } finally {
+      clearTimeout(timeoutId);
       setIsRefreshing(false);
     }
   };
@@ -362,6 +375,7 @@ export default function Home() {
       <div className="flex flex-1 overflow-hidden">
         <FlagList
           flags={flags}
+          error={flagsError}
           selectedFlag={selectedFlag}
           onSelect={(f) => {
             stopSimulation();

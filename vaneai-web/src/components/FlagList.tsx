@@ -5,12 +5,13 @@ import { FeatureFlag } from "@/types";
 
 interface Props {
   flags: FeatureFlag[];
+  error: string | null;
   selectedFlag: FeatureFlag | null;
   onSelect: (flag: FeatureFlag) => void;
   onOpenModal: () => void;
 }
 
-export default function FlagList({ flags, selectedFlag, onSelect, onOpenModal }: Props) {
+export default function FlagList({ flags, error, selectedFlag, onSelect, onOpenModal }: Props) {
   return (
     <aside className="w-80 border-r border-slate-800 bg-[#070a0f] p-4 flex flex-col justify-between">
       <div>
@@ -27,6 +28,12 @@ export default function FlagList({ flags, selectedFlag, onSelect, onOpenModal }:
         >
           <span>+ Import New Feature Flag</span>
         </button>
+
+        {error && (
+          <p className="mb-3 rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300">
+            {error}
+          </p>
+        )}
 
         <div className="space-y-2">
           {flags.map((flag) => {
