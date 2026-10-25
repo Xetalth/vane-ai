@@ -1,0 +1,4454 @@
+﻿
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\.rubocop.yml
+==================================================
+
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\Gemfile.lock
+==================================================
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    action_text-trix (2.1.19)
+      railties
+    actioncable (8.1.4)
+      actionpack (= 8.1.4)
+      activesupport (= 8.1.4)
+      nio4r (~> 2.0)
+      websocket-driver (>= 0.6.1)
+      zeitwerk (~> 2.6)
+    actionmailbox (8.1.4)
+      actionpack (= 8.1.4)
+      activejob (= 8.1.4)
+      activerecord (= 8.1.4)
+      activestorage (= 8.1.4)
+      activesupport (= 8.1.4)
+      mail (>= 2.8.0)
+    actionmailer (8.1.4)
+      actionpack (= 8.1.4)
+      actionview (= 8.1.4)
+      activejob (= 8.1.4)
+      activesupport (= 8.1.4)
+      mail (>= 2.8.0)
+      rails-dom-testing (~> 2.2)
+    actionpack (8.1.4)
+      actionview (= 8.1.4)
+      activesupport (= 8.1.4)
+      nokogiri (>= 1.8.5)
+      rack (>= 2.2.4)
+      rack-session (>= 1.0.1)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+      useragent (~> 0.16)
+    actiontext (8.1.4)
+      action_text-trix (~> 2.1.15)
+      actionpack (= 8.1.4)
+      activerecord (= 8.1.4)
+      activestorage (= 8.1.4)
+      activesupport (= 8.1.4)
+      globalid (>= 0.6.0)
+      nokogiri (>= 1.8.5)
+    actionview (8.1.4)
+      activesupport (= 8.1.4)
+      builder (~> 3.1)
+      erubi (~> 1.11)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+    activejob (8.1.4)
+      activesupport (= 8.1.4)
+      globalid (>= 0.3.6)
+    activemodel (8.1.4)
+      activesupport (= 8.1.4)
+    activerecord (8.1.4)
+      activemodel (= 8.1.4)
+      activesupport (= 8.1.4)
+      timeout (>= 0.4.0)
+    activestorage (8.1.4)
+      actionpack (= 8.1.4)
+      activejob (= 8.1.4)
+      activerecord (= 8.1.4)
+      activesupport (= 8.1.4)
+      marcel (~> 1.0)
+    activesupport (8.1.4)
+      base64
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.3.1)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      json
+      logger (>= 1.4.2)
+      minitest (>= 5.1)
+      securerandom (>= 0.3)
+      tzinfo (~> 2.0, >= 2.0.5)
+      uri (>= 0.13.1)
+    addressable (2.9.0)
+      public_suffix (>= 2.0.2, < 8.0)
+    ast (2.4.3)
+    base64 (0.3.0)
+    bcrypt_pbkdf (1.1.2)
+    bigdecimal (4.1.3)
+    bootsnap (1.26.0)
+      msgpack (~> 1.5)
+    brakeman (8.1.0)
+      racc
+    builder (3.3.0)
+    bundler-audit (0.9.3)
+      bundler (>= 1.2.0)
+      thor (~> 1.0)
+    concurrent-ruby (1.3.8)
+    connection_pool (3.0.2)
+    crass (1.0.7)
+    date (3.6.0)
+    debug (1.11.1)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
+    dotenv (3.2.0)
+    drb (2.2.3)
+    ed25519 (1.4.0)
+    erb (6.0.7)
+    erubi (1.13.1)
+    et-orbi (1.4.2)
+      tzinfo
+    faraday (2.15.0)
+      faraday-net_http (>= 2.0, < 3.6)
+      json
+      logger
+    faraday-net_http (3.5.0)
+      net-http (~> 0.5)
+    ffi (1.17.4-x64-mingw-ucrt)
+    ffi (1.17.4-x86_64-linux-gnu)
+    fugit (1.14.0)
+      et-orbi (~> 1.4)
+      raabro (~> 1.4)
+    globalid (1.4.0)
+      activesupport (>= 6.1)
+    i18n (1.15.2)
+      concurrent-ruby (~> 1.0)
+    image_processing (1.14.0)
+      mini_magick (>= 4.9.5, < 6)
+      ruby-vips (>= 2.0.17, < 3)
+    io-console (0.9.4)
+    irb (1.18.0)
+      pp (>= 0.6.0)
+      prism (>= 1.3.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
+    json (3.1.0)
+    kamal (2.12.0)
+      activesupport (>= 7.0)
+      base64 (~> 0.2)
+      bcrypt_pbkdf (~> 1.0)
+      concurrent-ruby (~> 1.2)
+      dotenv (~> 3.1)
+      ed25519 (~> 1.4)
+      net-ssh (~> 7.3)
+      sshkit (>= 1.23.0, < 2.0)
+      thor (~> 1.3)
+      zeitwerk (>= 2.6.18, < 3.0)
+    language_server-protocol (3.17.0.6)
+    lint_roller (1.1.0)
+    logger (1.7.0)
+    loofah (2.25.2)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.12.0)
+    mail (2.9.1)
+      logger
+      mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
+    marcel (1.2.1)
+    mini_magick (5.4.0)
+      logger
+    mini_mime (1.1.5)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
+    msgpack (1.8.5)
+    net-http (0.10.0)
+      net-protocol (>= 0.3.0)
+      uri (>= 0.11.1)
+    net-imap (0.6.8)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.4.0)
+      timeout
+    net-scp (4.1.0)
+      net-ssh (>= 2.6.5, < 8.0.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
+    net-smtp (0.5.2)
+      net-protocol
+    net-ssh (7.3.6)
+    nio4r (2.7.5)
+    nokogiri (1.19.4-x64-mingw-ucrt)
+      racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-linux-gnu)
+      racc (~> 1.4)
+    octokit (9.2.0)
+      faraday (>= 1, < 3)
+      sawyer (~> 0.9)
+    ostruct (0.6.3)
+    parallel (2.3.0)
+    parser (3.3.12.0)
+      ast (~> 2.4.1)
+      racc
+    pp (0.6.4)
+      prettyprint
+    prettyprint (0.2.1)
+    prism (1.9.0)
+    public_suffix (7.0.5)
+    puma (8.0.2)
+      nio4r (~> 2.0)
+    raabro (1.5.0)
+    racc (1.8.1)
+    rack (3.2.7)
+    rack-cors (3.0.0)
+      logger
+      rack (>= 3.0.14)
+    rack-session (2.1.2)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
+    rack-test (2.2.0)
+      rack (>= 1.3)
+    rackup (2.3.1)
+      rack (>= 3)
+    rails (8.1.4)
+      actioncable (= 8.1.4)
+      actionmailbox (= 8.1.4)
+      actionmailer (= 8.1.4)
+      actionpack (= 8.1.4)
+      actiontext (= 8.1.4)
+      actionview (= 8.1.4)
+      activejob (= 8.1.4)
+      activemodel (= 8.1.4)
+      activerecord (= 8.1.4)
+      activestorage (= 8.1.4)
+      activesupport (= 8.1.4)
+      bundler (>= 1.15.0)
+      railties (= 8.1.4)
+    rails-dom-testing (2.3.0)
+      activesupport (>= 5.0.0)
+      minitest
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.7.1)
+      loofah (~> 2.25, >= 2.25.2)
+      nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
+    railties (8.1.4)
+      actionpack (= 8.1.4)
+      activesupport (= 8.1.4)
+      irb (~> 1.13)
+      rackup (>= 1.0.0)
+      rake (>= 12.2)
+      thor (~> 1.0, >= 1.2.2)
+      tsort (>= 0.2)
+      zeitwerk (~> 2.6)
+    rainbow (3.1.1)
+    rake (13.4.2)
+    rbs (4.2.0)
+      logger
+      prism (>= 1.6.0)
+      tsort
+    rdoc (8.1.0)
+      erb
+      prism (>= 1.6.0)
+      rbs (>= 4.0.0)
+      tsort
+    regexp_parser (2.13.1)
+    reline (0.7.0)
+      io-console (~> 0.5)
+    rubocop (1.92.0)
+      json (>= 2.3)
+      language_server-protocol (~> 3.17.0.2)
+      lint_roller (~> 1.1.0)
+      parallel (>= 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.11.3, < 3.0)
+      rubocop-ast (>= 1.49.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.50.0)
+      parser (>= 3.3.7.2)
+      prism (~> 1.7)
+    rubocop-performance (1.27.0)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.89.0, < 2.0)
+      rubocop-ast (>= 1.47.1, < 2.0)
+    rubocop-rails (2.38.0)
+      activesupport (>= 4.2.0)
+      lint_roller (~> 1.1)
+      rack (>= 1.1)
+      rubocop (>= 1.89.0, < 2.0)
+      rubocop-ast (>= 1.44.0, < 2.0)
+    rubocop-rails-omakase (1.1.0)
+      rubocop (>= 1.72)
+      rubocop-performance (>= 1.24)
+      rubocop-rails (>= 2.30)
+    ruby-progressbar (1.13.0)
+    ruby-vips (2.3.0)
+      ffi (~> 1.12)
+      logger
+    sawyer (0.9.3)
+      addressable (>= 2.3.5)
+      faraday (>= 0.17.3, < 3)
+    securerandom (0.4.1)
+    solid_cable (4.1.0)
+      actioncable (>= 7.2)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
+    solid_cache (1.0.10)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
+    solid_queue (1.7.0)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      concurrent-ruby (>= 1.3.1)
+      fugit (~> 1.11)
+      railties (>= 7.1)
+      thor (>= 1.3.1)
+    sqlite3 (2.10.0-x64-mingw-ucrt)
+    sqlite3 (2.10.0-x86_64-linux-gnu)
+    sshkit (1.25.1)
+      base64
+      logger
+      net-scp (>= 1.1.2)
+      net-sftp (>= 2.1.2)
+      net-ssh (>= 2.8.0)
+      ostruct
+    thor (1.5.0)
+    thruster (0.1.27)
+    thruster (0.1.27-x86_64-linux)
+    timeout (0.6.1)
+    tsort (0.2.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2026.5)
+      tzinfo (>= 1.0.0)
+    unicode-display_width (3.3.0)
+      unicode-emoji (~> 4.3)
+    unicode-emoji (4.3.0)
+    uri (1.1.2)
+    useragent (0.16.11)
+    websocket-driver (0.8.2)
+      base64
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
+    zeitwerk (2.8.3)
+
+PLATFORMS
+  x64-mingw-ucrt
+  x86_64-linux
+
+DEPENDENCIES
+  bootsnap
+  brakeman
+  bundler-audit
+  debug
+  faraday
+  image_processing (~> 1.2)
+  kamal
+  octokit (~> 9.0)
+  puma (>= 5.0)
+  rack-cors
+  rails (~> 8.1.4)
+  rubocop-rails-omakase
+  solid_cable
+  solid_cache
+  solid_queue
+  sqlite3 (>= 2.1)
+  thruster
+  tzinfo-data
+
+CHECKSUMS
+  action_text-trix (2.1.19) sha256=7012f59421009cf284aa651294896414d653a61a2417c9b8714c8476d2f74009
+  actioncable (8.1.4) sha256=cfcd72f8c861e01ccdc96d772ad8c5ad6ed0ea7c571aef81a794b6027eaa7f11
+  actionmailbox (8.1.4) sha256=9c4525e577ebb671ce558f3ea78b8a634f64e56a0e6e8d105b28b873793a06eb
+  actionmailer (8.1.4) sha256=f82d95d6762ae46ea38f221d3363639266af4f8e56d50e2bd367558674baf093
+  actionpack (8.1.4) sha256=245493cc51be195a7645e6fc184880fa7e5b32ff1a08e053ee31f58c76e30ea4
+  actiontext (8.1.4) sha256=33ee99bea7da6af911fc7d98b17013a8e1ec62aa01b20b20e9a5366f40dbf644
+  actionview (8.1.4) sha256=eff1efd07c4d969abad288322b423bcb67fdbab5e324c91ca37352b80f226076
+  activejob (8.1.4) sha256=4ed5b2ed8d4cc5c8f5f09becfef8346f202a4884eee0c8c73cae5ac378824099
+  activemodel (8.1.4) sha256=9a0906c127bd118aa5f06157db12b8f750da83dccee72db2f658547a0ae7a0e8
+  activerecord (8.1.4) sha256=3b4957ea7f246c9231bd7faa909312eac03a9101aaf87977b6c52733ff00b04f
+  activestorage (8.1.4) sha256=f4956f3ec9ee63e5e0b332b57c877cb627f82b56f4cc902279310d2aa285c7a8
+  activesupport (8.1.4) sha256=891dd3fe43c4fc8391934b237b1189bb1f661c932a84a840043db9d46a4e80df
+  addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
+  ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
+  base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
+  bcrypt_pbkdf (1.1.2) sha256=c2414c23ce66869b3eb9f643d6a3374d8322dfb5078125c82792304c10b94cf6
+  bigdecimal (4.1.3) sha256=61ebe1e5e559bdc3cc6f2c0ee7f427321fc838f59611c294356eb04d6e21cf66
+  bootsnap (1.26.0) sha256=ca96237015e6cd74a02963d5821cf00ac5ea134653b323e8cd6d702a7718bf1b
+  brakeman (8.1.0) sha256=cfa9e5214e4925842f4bc849a64f8a7e6c5d0425fe98eac8d7b7bc60fdc17e07
+  builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
+  bundler (4.0.23) sha256=407ba8a1d928f412847f819aa5f8b6aef7c59fb51feb517112af8a165487287b
+  bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
+  concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
+  connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
+  crass (1.0.7) sha256=94868719948664c89ddcaf0a37c65048413dfcb1c869470a5f7a7ceb5390b295
+  date (3.6.0) sha256=18ac945c4e24ebd93534f8eab8c2fd8c5604b3e977105b3798d62a1e8d27b580
+  debug (1.11.1) sha256=2e0b0ac6119f2207a6f8ac7d4a73ca8eb4e440f64da0a3136c30343146e952b6
+  dotenv (3.2.0) sha256=e375b83121ea7ca4ce20f214740076129ab8514cd81378161f11c03853fe619d
+  drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
+  ed25519 (1.4.0) sha256=16e97f5198689a154247169f3453ef4cfd3f7a47481fde0ae33206cdfdcac506
+  erb (6.0.7) sha256=c5ca6dc25b0ef974a44dc8f59fe847577122483b1968a38dec305c60bf91ee92
+  erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
+  et-orbi (1.4.2) sha256=bb555dae668419cb24caa2a293a170e58be6d4df1e017c51f5030bdc133cd20c
+  faraday (2.15.0) sha256=3be0eff0187ed913a1b4f679e9fcfe845b542cdd4f75b76cd6181a4ae1335fff
+  faraday-net_http (3.5.0) sha256=2e7094c34e38754ee048cc3df47376f8657005d9375f8473bce1c3b526a22e36
+  ffi (1.17.4-x64-mingw-ucrt) sha256=f6ff9618cfccc494138bddade27aa06c74c6c7bc367a1ea1103d80c2fcb9ed35
+  ffi (1.17.4-x86_64-linux-gnu) sha256=9d3db14c2eae074b382fa9c083fe95aec6e0a1451da249eab096c34002bc752d
+  fugit (1.14.0) sha256=e311a9cc85a54bb67649df45060e721282a1e2c8ebad40e41874a3a7d576f37e
+  globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427
+  i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
+  image_processing (1.14.0) sha256=754cc169c9c262980889bec6bfd325ed1dafad34f85242b5a07b60af004742fb
+  io-console (0.9.4) sha256=a403304f32928ee85e56d457b4612ca43f2703b561a3258844992bd24085fbb1
+  irb (1.18.0) sha256=de9454a0703a54704b9811a5ef31a60c86949fbf4013fcf244fabc7c775248e3
+  json (3.1.0) sha256=3ce7ccf8fde58960177a3a756c31f292a4c1e1dedee884547096a5b0604e3bd8
+  kamal (2.12.0) sha256=c51d1ab085e515470f98d0c0f043637122b5ebf76e8b610cb1fbbed0b7f9b8fa
+  language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
+  lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
+  logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
+  loofah (2.25.2) sha256=2007f746959ac65552456e04b433e83deb22759ab38c838b4445c70e43425918
+  mail (2.9.1) sha256=06574eca475253d6c18145dd70af80d0eb970182d55053497c5f4d797ea160e8
+  marcel (1.2.1) sha256=1678e9360e32f9eafa917c80029e2f6d10b2715c66a4b87b6d0da9b9cd1f859f
+  mini_magick (5.4.0) sha256=f120af581d9ed4ec52c57f35a67a605d112bb1d8f582d1415b147fda42d11d78
+  mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
+  minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
+  msgpack (1.8.5) sha256=97419eaa7b35dfe3e462c0e6c1a3dfdcbfc8756605c09e46e4c6daef127517ba
+  net-http (0.10.0) sha256=1a2ff6e37a05724973c43f2bf7bf105f59c36a4cd0a7e9b1c021a0a566987c27
+  net-imap (0.6.8) sha256=eb30bb62227b64a3af6b518b04b2375113d69f68f15de59b0193b07d98acf6d9
+  net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
+  net-protocol (0.4.0) sha256=f9f90c8c6f64794a45160bf422177a336db12809de3beeeaa26b88fcd2e8c853
+  net-scp (4.1.0) sha256=a99b0b92a1e5d360b0de4ffbf2dc0c91531502d3d4f56c28b0139a7c093d1a5d
+  net-sftp (4.0.0) sha256=65bb91c859c2f93b09826757af11b69af931a3a9155050f50d1b06d384526364
+  net-smtp (0.5.2) sha256=35103cc04d6b2d94632f9928ede07483c24b70b9c0db1f231fea43909b678f3c
+  net-ssh (7.3.6) sha256=3364dedce752b9f5221e12ae970880d871a8e733e4730e4b9bd89e0b6808ce4b
+  nio4r (2.7.5) sha256=6c90168e48fb5f8e768419c93abb94ba2b892a1d0602cb06eef16d8b7df1dca1
+  nokogiri (1.19.4-x64-mingw-ucrt) sha256=051da97b8eccfdb5444fed40246a35e10d7298b9efe759b4cd25455ea04c587e
+  nokogiri (1.19.4-x86_64-linux-gnu) sha256=379fae440b28915e3f19d752ce2dcf8465ed2b2fbefd2a7ca0dd497bc981a06a
+  octokit (9.2.0) sha256=4fa47ff35ce654127edf2c836ab9269bcc8829f5542dc1e86871f697ce7f4316
+  ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
+  parallel (2.3.0) sha256=f75a3e904101ce6a1ccb6b8dc800cbafd42166d83330192438dcf29395167a6f
+  parser (3.3.12.0) sha256=21a6d7f755d5a24dfbdc6e6b772e4e879a52e7631a88bc5a3a134606052c9828
+  pp (0.6.4) sha256=dfcb0fce700c41456265922884f9fe195d7fbb0674a3578e6c0f69588e82b570
+  prettyprint (0.2.1) sha256=d555d57ea6d7cf001d4774b693546a6bd88bec1e778ddffb5c60b68ceec4b7d4
+  prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
+  public_suffix (7.0.5) sha256=1a8bb08f1bbea19228d3bed6e5ed908d1cb4f7c2726d18bd9cadf60bc676f623
+  puma (8.0.2) sha256=c8ed871dfbbe66448ea9ffd46692342d9804d4071522b52b5331b7b6e7b686fb
+  raabro (1.5.0) sha256=3f998a7bc84f9c84df3ab580634d2e0a5bda4f0841168d56035f529c9877440a
+  racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
+  rack (3.2.7) sha256=93e13e1c24f93556671d85d2d79fa228c3485815c50d7e2f265b5330c6528fb7
+  rack-cors (3.0.0) sha256=7b95be61db39606906b61b83bd7203fa802b0ceaaad8fcb2fef39e097bf53f68
+  rack-session (2.1.2) sha256=595434f8c0c3473ae7d7ac56ecda6cc6dfd9d37c0b2b5255330aa1576967ffe8
+  rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
+  rackup (2.3.1) sha256=6c79c26753778e90983761d677a48937ee3192b3ffef6bc963c0950f94688868
+  rails (8.1.4) sha256=5f3ecdf9a2a3b79b2e31b8fee3b64a00f7284d76e5631f87d0e58e665911a33b
+  rails-dom-testing (2.3.0) sha256=8acc7953a7b911ca44588bf08737bc16719f431a1cc3091a292bca7317925c1d
+  rails-html-sanitizer (1.7.1) sha256=e797a7c9b01e567307e317c576b49ab4168017e63eea4dba9ce3cb587e2f22c2
+  railties (8.1.4) sha256=b5e7a8e8984e33114d68af62227971960aae1e6c02bd7c9d826ffad97fff583c
+  rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
+  rake (13.4.2) sha256=cb825b2bd5f1f8e91ca37bddb4b9aaf345551b4731da62949be002fa89283701
+  rbs (4.2.0) sha256=51f7b886dcc05bc09e10b901daa6a81829f6adc03101d6ca9ea4aac6103e0674
+  rdoc (8.1.0) sha256=befc37880a5cfd36dcb176c748b5fd5ee39dd3536a75e81824e4972ce230f60a
+  regexp_parser (2.13.1) sha256=5aedb6b7c35688f51e86eef17a15374dfd287c83f4ca644b2c5f3ec50a33b44b
+  reline (0.7.0) sha256=5b012d8e55dbf9d450f12bde2cf7d15ff546ae80b3f8f3b30e570d431815583d
+  rubocop (1.92.0) sha256=2af68041fb2e70bd9321d0479b49fad07f8008a3d0758c83347b4917128c56e0
+  rubocop-ast (1.50.0) sha256=b9ca88300da0803ee222ad20cdb30494c0a784eed06fdc35d254b06d662788db
+  rubocop-performance (1.27.0) sha256=eeeb1374d062a368ee1c787b70eb0b0cc4b184cb1f8565f424760946146d61ce
+  rubocop-rails (2.38.0) sha256=6e2b7c532efa95e3050371bec20b8f5b025662acead8bc70ee31f0e3e6fa2f06
+  rubocop-rails-omakase (1.1.0) sha256=2af73ac8ee5852de2919abbd2618af9c15c19b512c4cfc1f9a5d3b6ef009109d
+  ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
+  ruby-vips (2.3.0) sha256=e685ec02c13969912debbd98019e50492e12989282da5f37d05f5471442f5374
+  sawyer (0.9.3) sha256=0d0f19298408047037638639fe62f4794483fb04320269169bd41af2bdcf5e41
+  securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
+  solid_cable (4.1.0) sha256=828e3d509207b82b4f05f4e9c85f696994710679b52d511aa7f97ebd212d3226
+  solid_cache (1.0.10) sha256=bc05a2fb3ac78a6f43cbb5946679cf9db67dd30d22939ededc385cb93e120d41
+  solid_queue (1.7.0) sha256=6566b70b801d1c317c81bba7bcdd5677c019afac584a30374b4164002ca356d3
+  sqlite3 (2.10.0-x64-mingw-ucrt) sha256=ec284ace2bca873737d0e8818f8eb31e5b84936b694f95933514872929b945d0
+  sqlite3 (2.10.0-x86_64-linux-gnu) sha256=295f48b240ba663efa2e3b6f38cbc0f19f5c8a2823a71fda3bf15531be5dd0e8
+  sshkit (1.25.1) sha256=be3f10b9d6eb0b44d5eaba3f7cbe41bc6bb894bce4339688ac20124391455b78
+  thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
+  thruster (0.1.27) sha256=5fd3855192bb4e8d13db69ae5f70d39f2dfd88fe0394fa372104996edf0bb599
+  thruster (0.1.27-x86_64-linux) sha256=7e0e6381011401810b047ff25506e0e38755b2430499ff5586f1a110086981c6
+  timeout (0.6.1) sha256=78f57368a7e7bbadec56971f78a3f5ecbcfb59b7fcbb0a3ed6ddc08a5094accb
+  tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
+  tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
+  tzinfo-data (1.2026.5) sha256=0bdc3c5a540b1704f73a7b5c9be5c90bd0a5866c8e9e8e8a7885977d23a81645
+  unicode-display_width (3.3.0) sha256=4b7aa66a4b11db50f6f7e98411215cd0dd10eaecb665d36eec5bcacb3fa0b613
+  unicode-emoji (4.3.0) sha256=11c02fa73290378c066bb0562cd4c87d8e1b706fbbe0059ca12746a4244de8ce
+  uri (1.1.2) sha256=89292e98eabbef6248b0a0ed5e7e398e152f83f17560023a6d94a7f492b169fb
+  useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
+  websocket-driver (0.8.2) sha256=97c556b019bf3410b4961002ac501621e9322d3f8a7bc02161a09301cc4c4146
+  websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
+  zeitwerk (2.8.3) sha256=2c85125a8467ce069e20123d1e709a08955c9d29c118c25b46b7b7fafdbb92e5
+
+BUNDLED WITH
+  4.0.23
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\README.md
+==================================================
+
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\.github\dependabot.yml
+==================================================
+
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\.github\workflows\ci.yml
+==================================================
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+jobs:
+  scan_ruby:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Scan for common Rails security vulnerabilities using static analysis
+        run: bin/brakeman --no-pager
+      
+      - name: Scan for known security vulnerabilities in gems used
+        run: bin/bundler-audit
+      
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      RUBOCOP_CACHE_ROOT: tmp/rubocop
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Prepare RuboCop cache
+        uses: actions/cache@v4
+        env:
+          DEPENDENCIES_HASH: ${{ hashFiles('.ruby-version', '**/.rubocop.yml', '**/.rubocop_todo.yml', 'Gemfile.lock') }}
+        with:
+          path: ${{ env.RUBOCOP_CACHE_ROOT }}
+          key: rubocop-${{ runner.os }}-${{ env.DEPENDENCIES_HASH }}-${{ github.ref_name == github.event.repository.default_branch && github.run_id || 'default' }}
+          restore-keys: |
+            rubocop-${{ runner.os }}-${{ env.DEPENDENCIES_HASH }}-
+
+      - name: Lint code for consistent style
+        run: bin/rubocop -f github
+
+  test:
+    runs-on: ubuntu-latest
+
+    # services:
+    #  redis:
+    #    image: valkey/valkey:8
+    #    ports:
+    #      - 6379:6379
+    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libvips
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          # REDIS_URL: redis://localhost:6379/0
+        run: bin/rails db:test:prepare test
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\controllers\application_controller.rb
+==================================================
+
+class ApplicationController < ActionController::API
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\controllers\api\v1\auth_controller.rb
+==================================================
+
+module Api
+  module V1
+    class AuthController < ApplicationController
+      skip_before_action :verify_authenticity_token, raise: false
+
+      def login
+        user = User.find_by(email: params[:email])
+
+        # Demo ve sunum kolaylÄ±ÄŸÄ± iÃ§in basit doÄŸrulama
+        if user && (params[:password] == "secret" || user.password_digest.blank?)
+          render json: {
+            user: { id: user.id, email: user.email },
+            organization: user.organization
+          }, status: :ok
+        else
+          render json: { error: "GeÃ§ersiz kullanÄ±cÄ± adÄ± veya ÅŸifre" }, status: :unauthorized
+        end
+      end
+    end
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\controllers\api\v1\feature_flags_controller.rb
+==================================================
+
+module Api
+  module V1
+    class FeatureFlagsController < ApplicationController
+      def index
+        @flags = FeatureFlag.all.order(created_at: :desc)
+        render json: @flags
+      end
+
+      def show
+        @flag = FeatureFlag.find(params[:id])
+        render json: @flag
+      end
+
+      def create
+        # Organization yoksa oluÅŸturur veya ilkini baÄŸlar
+        org = Organization.find_by(id: feature_flag_params[:organization_id]) || 
+              Organization.first_or_create!(name: "Acme Cloud", slug: "acme-cloud")
+
+        # traffic_allocation veya rollout_percentage uyuÅŸmazlÄ±ÄŸÄ±nÄ± Ã¶nlemek iÃ§in temiz parametreler
+        safe_params = feature_flag_params.except(:organization_id)
+        @flag = FeatureFlag.new(safe_params)
+        @flag.organization = org
+
+        if @flag.save
+          render json: @flag, status: :created
+        else
+          render json: { errors: @flag.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
+      end
+
+      def update
+        @flag = FeatureFlag.find(params[:id])
+        if @flag.update(feature_flag_params)
+          render json: @flag
+        else
+          render json: { errors: @flag.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+      def feature_flag_params
+        params.require(:feature_flag).permit(
+          :organization_id,
+          :name,
+          :key,
+          :connected_repo,
+          :code_context,
+          :rollout_percentage,
+          :status
+        )
+      end
+    end
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\controllers\api\v1\remediations_controller.rb
+==================================================
+
+module Api
+  module V1
+    class RemediationsController < ApplicationController
+      def apply
+        feature_flag = FeatureFlag.find(params[:feature_flag_id])
+        github_token = request.headers["X-GitHub-Token"] || params[:github_token]
+
+        if github_token.blank?
+          return render json: { error: "GitHub access token missing. Please authenticate first." }, status: :unauthorized
+        end
+
+        file_path = params[:file_path].presence || "app/service.py"
+        patched_code = params[:patched_code]
+
+        service = GithubCommitService.new(
+          token: github_token,
+          repo_full_name: feature_flag.connected_repo
+        )
+
+        result = service.apply_hotfix(
+          file_path: file_path,
+          new_content: patched_code
+        )
+
+        if result[:success]
+          render json: {
+            message: "Autonomous hotfix committed and Pull Request opened successfully.",
+            data: result
+          }, status: :ok
+        else
+          render json: { error: result[:error] }, status: :unprocessable_entity
+        end
+      end
+    end
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\controllers\api\v1\simulations_controller.rb
+==================================================
+
+module Api
+  module V1
+    class SimulationsController < ApplicationController
+      def create
+        flag = FeatureFlag.find_by(id: params[:feature_flag_id]) || FeatureFlag.first
+        error_rate = params[:error_rate].to_f
+        latency_p99 = params[:latency_p99].to_i
+        crash_count = params[:crash_count].to_i
+        current_code = flag&.code_context.to_s
+
+        # 1. KIRMIZI DURUM: Kritik Ã‡Ã¶kÃ¼ÅŸ (Error Rate > 2% veya Crash Count > 0)
+        if error_rate > 2.0 || crash_count > 0
+          diff = generate_critical_crash_diff(current_code)
+
+          render json: {
+            tier: "red",
+            risk_score: 96,
+            root_cause: "Unhandled ZeroDivisionError in calculation pipeline (fx_rate == 0)",
+            reasoning: "High-risk failure detected. Autonomous deployment halted by circuit breaker policy. Human sign-off required.",
+            diff: diff
+          }
+
+        # 2. SARI DURUM: Gecikme / Bellek ÅiÅŸmesi (Latency > 300ms veya Error Rate > 0.5%)
+        elsif latency_p99 > 300 || error_rate > 0.5
+          diff, patched_code = generate_latency_optimization_diff(current_code)
+
+          # SarÄ± durumda otonom olarak flag'in canlÄ± kodunu da hafÄ±zada gÃ¼ncelleyelim
+          flag.update(code_context: patched_code) if flag && patched_code.present?
+
+          render json: {
+            tier: "yellow",
+            risk_score: 42,
+            root_cause: "High P99 Latency & Unbounded Memory Accumulation (_GLOBAL_AUDIT_LOG)",
+            reasoning: "Autonomous patch applied: Converted blocking synchronous audit append to bounded LRU buffer. Canary progression resuming.",
+            diff: diff,
+            patched_code: patched_code
+          }
+
+        # 3. YEÅÄ°L DURUM: Nominal Metrikler
+        else
+          render json: {
+            tier: "nominal",
+            risk_score: 5,
+            root_cause: "Nominal operational baseline",
+            reasoning: "All telemetries within bounds. Rollout progression safe to increment."
+          }
+        end
+      end
+
+      private
+
+      # KÄ±rmÄ±zÄ± durum iÃ§in: ZeroDivisionError yamasÄ±
+      def generate_critical_crash_diff(code)
+        if code.include?("adjusted_payout = total_amount / fx_rate")
+          <<~DIFF
+            @@ -11,4 +11,7 @@
+            - adjusted_payout = total_amount / fx_rate
+            + # Autonomous Guardrail Hotfix: ZeroDivision Protection
+            + if fx_rate <= 0:
+            +     raise ValueError("Invalid fx_rate: exchange rate must be strictly positive")
+            + adjusted_payout = total_amount / fx_rate
+          DIFF
+        else
+          <<~DIFF
+            @@ -1,5 +1,7 @@
+            + # Autonomous Guardrail Circuit Breaker Applied
+            + if not validate_runtime_health():
+            +     return {"status": "CIRCUIT_BREAKER_ACTIVE", "error": "Crash isolated"}
+          DIFF
+        end
+      end
+
+      # SarÄ± durum iÃ§in: Bellek sÄ±zÄ±ntÄ±sÄ± ve gecikme optimizasyon yamasÄ±
+      def generate_latency_optimization_diff(code)
+        if code.include?("_GLOBAL_AUDIT_LOG.append")
+          diff = <<~DIFF
+            @@ -4,6 +4,8 @@
+            - _GLOBAL_AUDIT_LOG.append({"status": "SETTLED", "raw_payload": "X" * 1024 * 1024})
+            + # Autonomous Patch: Evict unbounded memory leak & optimize latency
+            + if len(_GLOBAL_AUDIT_LOG) > 1000:
+            +     _GLOBAL_AUDIT_LOG.pop(0)
+            + _GLOBAL_AUDIT_LOG.append({"batch_id": batch_id, "payout": adjusted_payout})
+          DIFF
+
+          patched = code.gsub(
+            /_GLOBAL_AUDIT_LOG\.append\(\{[\s\S]*?\}\)/,
+            "# Autonomous Patch: Bounded Ring Buffer\n    if len(_GLOBAL_AUDIT_LOG) > 1000:\n        _GLOBAL_AUDIT_LOG.pop(0)\n    _GLOBAL_AUDIT_LOG.append({\"batch_id\": batch_id, \"payout\": adjusted_payout})"
+          )
+          [diff, patched]
+        else
+          diff = <<~DIFF
+            @@ -2,3 +2,4 @@
+            + # Autonomous Patch: Async worker execution to lower P99 latency
+          DIFF
+          [diff, code]
+        end
+      end
+    end
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\jobs\application_job.rb
+==================================================
+
+class ApplicationJob < ActiveJob::Base
+  # Automatically retry jobs that encountered a deadlock
+  # retry_on ActiveRecord::Deadlocked
+
+  # Most jobs are safe to ignore if the underlying records are no longer available
+  # discard_on ActiveJob::DeserializationError
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\mailers\application_mailer.rb
+==================================================
+
+class ApplicationMailer < ActionMailer::Base
+  default from: "from@example.com"
+  layout "mailer"
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\models\agent_audit.rb
+==================================================
+
+class AgentAudit < ApplicationRecord
+  belongs_to :feature_flag
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\models\application_record.rb
+==================================================
+
+class ApplicationRecord < ActiveRecord::Base
+  primary_abstract_class
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\models\canary_metric.rb
+==================================================
+
+class CanaryMetric < ApplicationRecord
+  belongs_to :feature_flag
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\models\feature_flag.rb
+==================================================
+
+class FeatureFlag < ApplicationRecord
+  belongs_to :organization, optional: true
+
+  validates :name, :key, presence: true
+end 
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\models\organization.rb
+==================================================
+
+class Organization < ApplicationRecord
+  has_many :users, dependent: :destroy
+  has_many :feature_flags, dependent: :destroy
+
+  validates :name, presence: true
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\models\user.rb
+==================================================
+
+class User < ApplicationRecord
+  belongs_to :organization
+
+  validates :email, presence: true, uniqueness: true
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\services\github_commit_service.rb
+==================================================
+
+require "octokit"
+
+class GithubCommitService
+  def initialize(token:, repo_full_name:)
+    # "github.com/org/repo" veya "org/repo" formatÄ±nÄ± temizle
+    @repo = repo_full_name.to_s.sub(%r{\Ahttps?://github\.com/}, "").sub(%r{\Agithub\.com/}, "")
+    @client = Octokit::Client.new(access_token: token)
+  end
+
+  def apply_hotfix(file_path:, new_content:, commit_message: "fix(guardrail): autonomous AI remediation hotfix")
+    # 1. Deponun varsayÄ±lan dalÄ±nÄ± (default branch) bul
+    repo_info = @client.repository(@repo)
+    default_branch = repo_info.default_branch
+
+    # 2. VarsayÄ±lan dalÄ±n son commit SHA'sÄ±nÄ± al
+    base_ref = @client.ref(@repo, "heads/#{default_branch}")
+    base_sha = base_ref.object.sha
+
+    # 3. Hotfix iÃ§in yeni bir dal (branch) tÃ¼ret
+    branch_name = "vaneai-hotfix-#{Time.now.to_i}"
+    @client.create_ref(@repo, "heads/#{branch_name}", base_sha)
+
+    # 4. Dosya zaten varsa SHA'sÄ±nÄ± al (update iÃ§in gerekir), yoksa yeni oluÅŸtur
+    file_sha = nil
+    begin
+      existing_file = @client.contents(@repo, path: file_path, ref: branch_name)
+      file_sha = existing_file.sha
+    rescue Octokit::NotFound
+      file_sha = nil
+    end
+
+    # 5. DosyayÄ± yeni dala commit'le
+    commit_result = if file_sha
+      @client.update_contents(@repo, file_path, commit_message, file_sha, new_content, branch: branch_name)
+    else
+      @client.create_contents(@repo, file_path, commit_message, new_content, branch: branch_name)
+    end
+
+    # 6. Otomatik bir Pull Request aÃ§
+    pr = @client.create_pull_request(
+      @repo,
+      default_branch,
+      branch_name,
+      "ğŸ¤– [VaneAI Hotfix] Autonomous Guardrail Patch",
+      "### Autonomous Remediation\n\nVaneAI APM guardrail detected an anomaly and generated this automated patch.\n\n- **Target File:** `#{file_path}`\n- **Source Branch:** `#{branch_name}`\n- **Base Branch:** `#{default_branch}`"
+    )
+
+    {
+      success: true,
+      commit_sha: commit_result.commit.sha,
+      branch: branch_name,
+      pr_url: pr.html_url,
+      pr_number: pr.number
+    }
+  rescue Octokit::Error => e
+    { success: false, error: e.message }
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\app\services\release_guardian_agent.rb
+==================================================
+
+class ReleaseGuardianAgent
+  GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+  MODEL_NAME = "openai/gpt-oss-120b"
+
+  def initialize(feature_flag, canary_metric)
+    @flag = feature_flag
+    @metric = canary_metric
+    @api_key = ENV["GROQ_API_KEY"] || Rails.application.credentials.groq_api_key
+  end
+
+  def evaluate_and_execute!
+    parsed = fetch_llm_decision
+
+    # Otonom Rollback kararÄ± alÄ±ndÄ±ysa bayraÄŸÄ± anÄ±nda %0 yap ve kapat
+    if parsed["action_taken"] == "AUTONOMOUS_ROLLBACK" && parsed["execution_status"] == "EXECUTED"
+      @flag.update!(rollout_percentage: 0, status: "killed_by_agent")
+    end
+
+    AgentAudit.create!(
+      feature_flag: @flag,
+      risk_score: parsed["risk_score"] || 20,
+      risk_tier: parsed["risk_tier"] || "LOW",
+      action_taken: parsed["action_taken"] || "AUTONOMOUS_ROLLBACK",
+      execution_status: parsed["execution_status"] || "EXECUTED",
+      reasoning: parsed["reasoning"] || "Automated decision executed.",
+      payload: parsed["payload"] || "vanectl flag set #{@flag.key} --rollout 0"
+    )
+  end
+
+  private
+
+  def fetch_llm_decision
+    prompt = <<~PROMPT
+      You are VaneAI's autonomous Release Guardian Agent for Hulu's progressive canary deployments.
+      Evaluate live telemetry and crash logs:
+      Feature Flag: #{@flag.name} (#{@flag.key})
+      Current Rollout: #{@flag.rollout_percentage}%
+      Sample Size: #{@metric.sample_size} requests
+      Error Rate: #{@metric.error_rate}%
+      p99 Latency: #{@metric.latency_p99} ms
+      Total Crashes: #{@metric.crash_count}
+      Crash Logs: #{@metric.logs_payload}
+
+      DECISION RULES:
+      1. CRITICAL CRASHES / SIGSEGV:
+         - Action: "AUTONOMOUS_ROLLBACK", Status: "EXECUTED", Target Rollout: 0, Risk Score: 20
+         - Reason: Fatal crash directly impacts video player stability. Zero-touch rollback executed.
+      2. ELEVATED LATENCY SPIKE (p99 > 1000ms, no crashes):
+         - Action: "HUMAN_APPROVAL_REQUIRED", Status: "GUARDRAIL_BLOCKED", Target Rollout: #{@flag.rollout_percentage}, Risk Score: 85
+         - Reason: Edge latency elevated. Guardrail engaged: Architect approval required before rollback.
+      3. HEALTHY TELEMETRY:
+         - Action: "PROCEED_ROLLOUT", Status: "EXECUTED", Target Rollout: #{@flag.rollout_percentage + 10}, Risk Score: 5
+         - Reason: Telemetry satisfies SLAs.
+
+      Output ONLY valid JSON:
+      {"risk_score": 20, "risk_tier": "LOW", "action_taken": "AUTONOMOUS_ROLLBACK", "execution_status": "EXECUTED", "reasoning": "Fatal crash detected. Rollback executed.", "payload": "vanectl flag set #{@flag.key} --rollout 0"}
+    PROMPT
+
+    # EÄŸer API key yoksa veya Groq cevap vermezse deterministik yedek kural motoru devreye girsin (500 vermesin)
+    if @api_key.blank?
+      return fallback_rule_engine
+    end
+
+    response = Faraday.post(GROQ_API_URL) do |req|
+      req.headers["Authorization"] = "Bearer #{@api_key}"
+      req.headers["Content-Type"] = "application/json"
+      req.body = {
+        model: MODEL_NAME,
+        messages: [
+          { role: "system", content: "You are a deterministic SRE agent that outputs strictly valid JSON." },
+          { role: "user", content: prompt }
+        ],
+        temperature: 0.1,
+        response_format: { type: "json_object" }
+      }.to_json
+    end
+
+    body = JSON.parse(response.body)
+
+    if body["error"] || body.dig("choices", 0, "message", "content").nil?
+      return fallback_rule_engine
+    end
+
+    raw_content = body.dig("choices", 0, "message", "content")
+    clean_content = raw_content.gsub(/```json/, "").gsub(/```/, "").strip
+    JSON.parse(clean_content)
+  rescue StandardError => e
+    Rails.logger.error("Guardian Agent Fallback Triggered: #{e.message}")
+    fallback_rule_engine
+  end
+
+  def fallback_rule_engine
+    if @metric.crash_count.to_i > 0
+      {
+        "risk_score" => 25,
+        "risk_tier" => "LOW",
+        "action_taken" => "AUTONOMOUS_ROLLBACK",
+        "execution_status" => "EXECUTED",
+        "reasoning" => "Fatal memory buffer corruption (SIGSEGV) detected (#{@metric.crash_count} crashes). Zero-touch emergency rollback executed to protect Hulu living room stream.",
+        "payload" => "vanectl flag set #{@flag.key} --rollout 0 --reason 'Auto-rollback by VaneAI Agent'"
+      }
+    elsif @metric.latency_p99.to_i > 1000
+      {
+        "risk_score" => 85,
+        "risk_tier" => "HIGH",
+        "action_taken" => "HUMAN_APPROVAL_REQUIRED",
+        "execution_status" => "GUARDRAIL_BLOCKED",
+        "reasoning" => "p99 latency (#{@metric.latency_p99}ms) violates SLA across US-East edge CDN nodes. Blocker engaged: SRE architect review required to prevent false-positive rollback.",
+        "payload" => "vanectl flag hold #{@flag.key} --require-approval SRE_LEAD"
+      }
+    else
+      {
+        "risk_score" => 5,
+        "risk_tier" => "LOW",
+        "action_taken" => "PROCEED_ROLLOUT",
+        "execution_status" => "EXECUTED",
+        "reasoning" => "Canary telemetry meets all production SLO thresholds. Rollout progression safe.",
+        "payload" => "vanectl flag set #{@flag.key} --rollout #{@flag.rollout_percentage + 10}"
+      }
+    end
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\application.rb
+==================================================
+
+require_relative "boot"
+
+require "rails/all"
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module VaneaiApi
+  class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 8.1
+
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
+
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\boot.rb
+==================================================
+
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../Gemfile", __dir__)
+
+require "bundler/setup" # Set up gems listed in the Gemfile.
+require "bootsnap/setup" # Speed up boot time by caching expensive operations.
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\bundler-audit.yml
+==================================================
+
+# Audit all gems listed in the Gemfile for known security problems by running bin/bundler-audit.
+# CVEs that are not relevant to the application can be enumerated on the ignore list below.
+
+ignore:
+  - CVE-THAT-DOES-NOT-APPLY
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\cable.yml
+==================================================
+
+# Async adapter only works within the same process, so for manually triggering cable updates from a console,
+# and seeing results in the browser, you must do so from the web console (running inside the dev process),
+# not a terminal started via bin/rails console! Add "console" to any action or any ERB template view
+# to make the web console appear.
+development:
+  adapter: async
+
+test:
+  adapter: test
+
+production:
+  adapter: solid_cable
+  connects_to:
+    database:
+      writing: cable
+  polling_interval: 0.1.seconds
+  message_retention: 1.day
+  writer_batch_size: 4
+  writer_batch_delay: 0.001.seconds
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\cache.yml
+==================================================
+
+default: &default
+  store_options:
+    # Cap age of oldest cache entry to fulfill retention policies
+    # max_age: <%= 60.days.to_i %>
+    max_size: <%= 256.megabytes %>
+    namespace: <%= Rails.env %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  database: cache
+  <<: *default
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\ci.rb
+==================================================
+
+# Run using bin/ci
+
+CI.run do
+  step "Setup", "bin/setup --skip-server"
+
+  step "Style: Ruby", "bin/rubocop"
+
+  step "Security: Gem audit", "bin/bundler-audit"
+  step "Security: Brakeman code analysis", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
+  step "Tests: Rails", "bin/rails test"
+  step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"
+
+  # Optional: Run system tests
+  # step "Tests: System", "bin/rails test:system"
+
+  # Optional: set a green GitHub commit status to unblock PR merge.
+  # Requires the `gh` CLI and `gh extension install basecamp/gh-signoff`.
+  # if success?
+  #   step "Signoff: All systems go. Ready for merge and deploy.", "gh signoff"
+  # else
+  #   failure "Signoff: CI failed. Do not merge or deploy.", "Fix the issues and try again."
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\database.yml
+==================================================
+
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
+default: &default
+  adapter: sqlite3
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: storage/development.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: storage/test.sqlite3
+
+# Store production database in the storage/ directory, which by default
+# is mounted as a persistent Docker volume in config/deploy.yml.
+production:
+  primary:
+    <<: *default
+    database: storage/production.sqlite3
+  cache:
+    <<: *default
+    database: storage/production_cache.sqlite3
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: storage/production_queue.sqlite3
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_migrate
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\deploy.yml
+==================================================
+
+# Name of your application. Used to uniquely configure containers.
+service: vaneai_api
+
+# Name of the container image (use your-user/app-name on external registries).
+image: vaneai_api
+
+# Deploy to these servers.
+servers:
+  web:
+    - 192.168.0.1
+  # job:
+  #   hosts:
+  #     - 192.168.0.1
+  #   cmd: bin/jobs
+
+# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
+# If used with Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
+#
+# Using an SSL proxy like this requires turning on config.assume_ssl and config.force_ssl in production.rb!
+#
+# Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
+#
+# proxy:
+#   ssl: true
+#   host: app.example.com
+
+# Where you keep your container images.
+registry:
+  # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
+  server: localhost:5555
+
+  # Needed for authenticated registries.
+  # username: your-user
+
+  # Always use an access token rather than real password when possible.
+  # password:
+  #   - KAMAL_REGISTRY_PASSWORD
+
+# Inject ENV variables into containers (secrets come from .kamal/secrets).
+env:
+  secret:
+    - RAILS_MASTER_KEY
+  clear:
+    # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
+    # When you start using multiple servers, you should split out job processing to a dedicated machine.
+    SOLID_QUEUE_IN_PUMA: true
+
+    # Set number of processes dedicated to Solid Queue (default: 1)
+    # JOB_CONCURRENCY: 3
+
+    # Set number of cores available to the application on each server (default: 1).
+    # WEB_CONCURRENCY: 2
+
+    # Match this to any external database server to configure Active Record correctly
+    # Use vaneai_api-db for a db accessory server on same machine via local kamal docker network.
+    # DB_HOST: 192.168.0.2
+
+    # Log everything from Rails
+    # RAILS_LOG_LEVEL: debug
+
+# Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
+# "bin/kamal logs -r job" will tail logs from the first server in the job section.
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
+
+# Use a persistent storage volume for sqlite database files and local Active Storage files.
+# Recommended to change this to a mounted volume path that is backed up off server.
+volumes:
+  - "vaneai_api_storage:/rails/storage"
+
+
+# Configure the image builder.
+builder:
+  arch: amd64
+
+  # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
+  # remote: ssh://docker@docker-builder-server
+  #
+  # # Pass arguments and secrets to the Docker build process
+  # args:
+  #   RUBY_VERSION: ruby-4.0.7
+  # secrets:
+  #   - GITHUB_TOKEN
+  #   - RAILS_MASTER_KEY
+
+# Use a different ssh user than root
+# ssh:
+#   user: app
+
+# Use accessory services (secrets come from .kamal/secrets).
+# accessories:
+#   db:
+#     image: mysql:8.0
+#     host: 192.168.0.2
+#     # Change to 3306 to expose port to the world instead of just local network.
+#     port: "127.0.0.1:3306:3306"
+#     env:
+#       clear:
+#         MYSQL_ROOT_HOST: '%'
+#       secret:
+#         - MYSQL_ROOT_PASSWORD
+#     files:
+#       - config/mysql/production.cnf:/etc/mysql/my.cnf
+#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+#     directories:
+#       - data:/var/lib/mysql
+#   redis:
+#     image: valkey/valkey:8
+#     host: 192.168.0.2
+#     port: 6379
+#     directories:
+#       - data:/data
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\environment.rb
+==================================================
+
+# Load the Rails application.
+require_relative "application"
+
+# Initialize the Rails application.
+Rails.application.initialize!
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\puma.rb
+==================================================
+
+# This configuration file will be evaluated by Puma. The top-level methods that
+# are invoked here are part of Puma's configuration DSL. For more information
+# about methods provided by the DSL, see https://puma.io/puma/Puma/DSL.html.
+#
+# Puma starts a configurable number of processes (workers) and each process
+# serves each request in a thread from an internal thread pool.
+#
+# You can control the number of workers using ENV["WEB_CONCURRENCY"]. You
+# should only set this value when you want to run 2 or more workers. The
+# default is already 1. You can set it to `auto` to automatically start a worker
+# for each available processor.
+#
+# The ideal number of threads per worker depends both on how much time the
+# application spends waiting for IO operations and on how much you wish to
+# prioritize throughput over latency.
+#
+# As a rule of thumb, increasing the number of threads will increase how much
+# traffic a given process can handle (throughput), but due to CRuby's
+# Global VM Lock (GVL) it has diminishing returns and will degrade the
+# response time (latency) of the application.
+#
+# The default is set to 3 threads as it's deemed a decent compromise between
+# throughput and latency for the average Rails application.
+#
+# Any libraries that use a connection pool or another resource pool should
+# be configured to provide at least as many connections as the number of
+# threads. This includes Active Record's `pool` parameter in `database.yml`.
+threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
+threads threads_count, threads_count
+
+# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
+port ENV.fetch("PORT", 3000)
+
+# Allow puma to be restarted by `bin/rails restart` command.
+plugin :tmp_restart
+
+# Run the Solid Queue supervisor inside of Puma for single-server deployments.
+plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
+
+# Specify the PID file. Defaults to tmp/pids/server.pid in development.
+# In other environments, only set the PID file if requested.
+pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\queue.yml
+==================================================
+
+default: &default
+  dispatchers:
+    - polling_interval: 1
+      batch_size: 500
+  workers:
+    - queues: "*"
+      threads: 3
+      processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
+      polling_interval: 1
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\recurring.yml
+==================================================
+
+# examples:
+#   periodic_cleanup:
+#     class: CleanSoftDeletedRecordsJob
+#     queue: background
+#     args: [ 1000, { batch_size: 500 } ]
+#     schedule: every hour
+#   periodic_cleanup_with_command:
+#     command: "SoftDeletedRecord.due.delete_all"
+#     priority: 2
+#     schedule: at 5am every day
+
+production:
+  clear_solid_queue_finished_jobs:
+    command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
+    schedule: every hour at minute 12
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\routes.rb
+==================================================
+
+Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      post "auth/login", to: "auth#login"
+      resources :feature_flags, only: [:index, :create, :show, :update]
+      post "simulate", to: "simulations#create"
+      post "remediations/apply", to: "remediations#apply"
+    end
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\storage.yml
+==================================================
+
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+# Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
+# amazon:
+#   service: S3
+#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+#   region: us-east-1
+#   bucket: your_own_bucket-<%= Rails.env %>
+
+# Remember not to checkin your GCS keyfile to a repository
+# google:
+#   service: GCS
+#   project: your_project
+#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
+#   bucket: your_own_bucket-<%= Rails.env %>
+
+# mirror:
+#   service: Mirror
+#   primary: local
+#   mirrors: [ amazon, google, microsoft ]
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\environments\development.rb
+==================================================
+
+require "active_support/core_ext/integer/time"
+
+Rails.application.configure do
+  # Settings specified here will take precedence over those in config/application.rb.
+
+  # Make code changes take effect immediately without server restart.
+  config.enable_reloading = true
+
+  # Do not eager load code on boot.
+  config.eager_load = false
+
+  # Show full error reports.
+  config.consider_all_requests_local = true
+
+  # Enable server timing.
+  config.server_timing = true
+
+  # Enable/disable Action Controller caching. By default Action Controller caching is disabled.
+  # Run rails dev:cache to toggle Action Controller caching.
+  if Rails.root.join("tmp/caching-dev.txt").exist?
+    config.public_file_server.headers = { "cache-control" => "public, max-age=#{2.days.to_i}" }
+  else
+    config.action_controller.perform_caching = false
+  end
+
+  # Change to :null_store to avoid any caching.
+  config.cache_store = :memory_store
+
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local
+
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
+
+  # Make template changes take effect immediately.
+  config.action_mailer.perform_caching = false
+
+  # Set localhost to be used by links generated in mailer templates.
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # Print deprecation notices to the Rails logger.
+  config.active_support.deprecation = :log
+
+  # Raise an error on page load if there are pending migrations.
+  config.active_record.migration_error = :page_load
+
+  # Highlight code that triggered database queries in logs.
+  config.active_record.verbose_query_logs = true
+
+  # Append comments with runtime information tags to SQL queries in logs.
+  config.active_record.query_log_tags_enabled = true
+
+  # Highlight code that enqueued background job in logs.
+  config.active_job.verbose_enqueue_logs = true
+
+  # Highlight code that triggered redirect in logs.
+  config.action_dispatch.verbose_redirect_logs = true
+
+  # Raises error for missing translations.
+  # config.i18n.raise_on_missing_translations = true
+
+  # Annotate rendered view with file names.
+  config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Uncomment if you wish to allow Action Cable access from any origin.
+  # config.action_cable.disable_request_forgery_protection = true
+
+  # Raise error when a before_action's only/except options reference missing actions.
+  config.action_controller.raise_on_missing_callback_actions = true
+
+  # Apply autocorrection by RuboCop to files generated by `bin/rails generate`.
+  # config.generators.apply_rubocop_autocorrect_after_generate!
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\environments\production.rb
+==================================================
+
+require "active_support/core_ext/integer/time"
+
+Rails.application.configure do
+  # Settings specified here will take precedence over those in config/application.rb.
+
+  # Code is not reloaded between requests.
+  config.enable_reloading = false
+
+  # Eager load code on boot for better performance and memory savings (ignored by Rake tasks).
+  config.eager_load = true
+
+  # Full error reports are disabled.
+  config.consider_all_requests_local = false
+
+  # Cache assets for far-future expiry since they are all digest stamped.
+  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  # config.asset_host = "http://assets.example.com"
+
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local
+
+  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
+  # config.assume_ssl = true
+  config.assume_ssl = true
+
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # config.force_ssl = true
+  config.force_ssl = true
+
+  # Skip http-to-https redirect for the default health check endpoint.
+  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+
+  # Log to STDOUT with the current request id as a default log tag.
+  config.log_tags = [ :request_id ]
+  config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
+
+  # Change to "debug" to log everything (including potentially personally-identifiable information!).
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+
+  # Prevent health checks from clogging up the logs.
+  config.silence_healthcheck_path = "/up"
+
+  # Don't log any deprecations.
+  config.active_support.report_deprecations = false
+
+  # Replace the default in-process memory cache store with a durable alternative.
+  config.cache_store = :solid_cache_store
+
+  # Replace the default in-process and non-durable queuing backend for Active Job.
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
+
+  # Ignore bad email addresses and do not raise email delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # config.action_mailer.raise_delivery_errors = false
+
+  # Set host to be used by links generated in mailer templates.
+  config.action_mailer.default_url_options = { host: "example.com" }
+
+  # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
+  # config.action_mailer.smtp_settings = {
+  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
+  #   password: Rails.application.credentials.dig(:smtp, :password),
+  #   address: "smtp.example.com",
+  #   port: 587,
+  #   authentication: :plain
+  # }
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation cannot be found).
+  config.i18n.fallbacks = true
+
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
+
+  # Only use :id for inspections in production.
+  config.active_record.attributes_for_inspect = [ :id ]
+  config.hosts << /.*\.onrender\.com/
+  config.hosts << /.*\.onrender\.com/
+  config.hosts << /.*\.vercel\.app/
+  config.require_master_key = false
+  config.secret_key_base = ENV["SECRET_KEY_BASE"] || "da7b4e9f8a3c2d1e0f5b6a7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e"
+
+
+
+  # Enable DNS rebinding protection and other `Host` header attacks.
+  # config.hosts = [
+  #   "example.com",     # Allow requests from example.com
+  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
+  # ]
+  #
+  # Skip DNS rebinding protection for the default health check endpoint.
+  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\environments\test.rb
+==================================================
+
+# The test environment is used exclusively to run your application's
+# test suite. You never need to work with it otherwise. Remember that
+# your test database is "scratch space" for the test suite and is wiped
+# and recreated between test runs. Don't rely on the data there!
+
+Rails.application.configure do
+  # Settings specified here will take precedence over those in config/application.rb.
+
+  # While tests run files are not watched, reloading is not necessary.
+  config.enable_reloading = false
+
+  # Eager loading loads your entire application. When running a single test locally,
+  # this is usually not necessary, and can slow down your test suite. However, it's
+  # recommended that you enable it in continuous integration systems to ensure eager
+  # loading is working properly before deploying your code.
+  config.eager_load = ENV["CI"].present?
+
+  # Configure public file server for tests with cache-control for performance.
+  config.public_file_server.headers = { "cache-control" => "public, max-age=3600" }
+
+  # Show full error reports.
+  config.consider_all_requests_local = true
+  config.cache_store = :null_store
+
+  # Render exception templates for rescuable exceptions and raise for other exceptions.
+  config.action_dispatch.show_exceptions = :rescuable
+
+  # Disable request forgery protection in test environment.
+  config.action_controller.allow_forgery_protection = false
+
+  # Store uploaded files on the local file system in a temporary directory.
+  config.active_storage.service = :test
+
+  # Tell Action Mailer not to deliver emails to the real world.
+  # The :test delivery method accumulates sent emails in the
+  # ActionMailer::Base.deliveries array.
+  config.action_mailer.delivery_method = :test
+
+  # Set host to be used by links generated in mailer templates.
+  config.action_mailer.default_url_options = { host: "example.com" }
+
+  # Print deprecation notices to the stderr.
+  config.active_support.deprecation = :stderr
+
+  # Raises error for missing translations.
+  # config.i18n.raise_on_missing_translations = true
+
+  # Annotate rendered view with file names.
+  # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Raise error when a before_action's only/except options reference missing actions.
+  config.action_controller.raise_on_missing_callback_actions = true
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\initializers\cors.rb
+==================================================
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins "*"
+
+    resource "*",
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\initializers\filter_parameter_logging.rb
+==================================================
+
+# Be sure to restart your server when you modify this file.
+
+# Configure parameters to be partially matched (e.g. passw matches password) and filtered from the log file.
+# Use this to limit dissemination of sensitive information.
+# See the ActiveSupport::ParameterFilter documentation for supported notations and behaviors.
+Rails.application.config.filter_parameters += [
+  :passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc
+]
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\initializers\inflections.rb
+==================================================
+
+# Be sure to restart your server when you modify this file.
+
+# Add new inflection rules using the following format. Inflections
+# are locale specific, and you may define rules for as many different
+# locales as you wish. All of these examples are active by default:
+# ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.plural /^(ox)$/i, "\\1en"
+#   inflect.singular /^(ox)en/i, "\\1"
+#   inflect.irregular "person", "people"
+#   inflect.uncountable %w( fish sheep )
+# end
+
+# These inflection rules are supported but not enabled by default:
+# ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.acronym "RESTful"
+# end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\config\locales\en.yml
+==================================================
+
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+en:
+  hello: "Hello world"
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\cable_schema.rb
+==================================================
+
+ActiveRecord::Schema[7.1].define(version: 1) do
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.binary "channel", limit: 1024, null: false
+    t.binary "payload", limit: 536870912, null: false
+    t.datetime "created_at", null: false
+    t.integer "channel_hash", limit: 8, null: false
+    t.index ["channel_hash"], name: "index_solid_cable_messages_on_channel_hash"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\cache_schema.rb
+==================================================
+
+ActiveRecord::Schema[7.2].define(version: 1) do
+  create_table "solid_cache_entries", force: :cascade do |t|
+    t.binary "key", limit: 1024, null: false
+    t.binary "value", limit: 536870912, null: false
+    t.datetime "created_at", null: false
+    t.integer "key_hash", limit: 8, null: false
+    t.integer "byte_size", limit: 4, null: false
+    t.index ["byte_size"], name: "index_solid_cache_entries_on_byte_size"
+    t.index ["key_hash", "byte_size"], name: "index_solid_cache_entries_on_key_hash_and_byte_size"
+    t.index ["key_hash"], name: "index_solid_cache_entries_on_key_hash", unique: true
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\queue_schema.rb
+==================================================
+
+ActiveRecord::Schema[7.1].define(version: 1) do
+  create_table "solid_queue_blocked_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "queue_name", null: false
+    t.integer "priority", default: 0, null: false
+    t.string "concurrency_key", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.index [ "concurrency_key", "priority", "job_id" ], name: "index_solid_queue_blocked_executions_for_release"
+    t.index [ "expires_at", "concurrency_key" ], name: "index_solid_queue_blocked_executions_for_maintenance"
+    t.index [ "job_id" ], name: "index_solid_queue_blocked_executions_on_job_id", unique: true
+  end
+
+  create_table "solid_queue_claimed_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "process_id"
+    t.datetime "created_at", null: false
+    t.index [ "job_id" ], name: "index_solid_queue_claimed_executions_on_job_id", unique: true
+    t.index [ "process_id", "job_id" ], name: "index_solid_queue_claimed_executions_on_process_id_and_job_id"
+  end
+
+  create_table "solid_queue_failed_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.text "error"
+    t.datetime "created_at", null: false
+    t.index [ "job_id" ], name: "index_solid_queue_failed_executions_on_job_id", unique: true
+  end
+
+  create_table "solid_queue_jobs", force: :cascade do |t|
+    t.string "queue_name", null: false
+    t.string "class_name", null: false
+    t.text "arguments"
+    t.integer "priority", default: 0, null: false
+    t.string "active_job_id"
+    t.datetime "scheduled_at"
+    t.datetime "finished_at"
+    t.string "concurrency_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "batch_id"
+    t.index [ "active_job_id" ], name: "index_solid_queue_jobs_on_active_job_id"
+    t.index [ "batch_id" ], name: "index_solid_queue_jobs_on_batch_id"
+    t.index [ "class_name" ], name: "index_solid_queue_jobs_on_class_name"
+    t.index [ "finished_at" ], name: "index_solid_queue_jobs_on_finished_at"
+    t.index [ "queue_name", "finished_at" ], name: "index_solid_queue_jobs_for_filtering"
+    t.index [ "scheduled_at", "finished_at" ], name: "index_solid_queue_jobs_for_alerting"
+  end
+
+  create_table "solid_queue_pauses", force: :cascade do |t|
+    t.string "queue_name", null: false
+    t.datetime "created_at", null: false
+    t.index [ "queue_name" ], name: "index_solid_queue_pauses_on_queue_name", unique: true
+  end
+
+  create_table "solid_queue_processes", force: :cascade do |t|
+    t.string "kind", null: false
+    t.datetime "last_heartbeat_at", null: false
+    t.bigint "supervisor_id"
+    t.integer "pid", null: false
+    t.string "hostname"
+    t.text "metadata"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.index [ "last_heartbeat_at" ], name: "index_solid_queue_processes_on_last_heartbeat_at"
+    t.index [ "name", "supervisor_id" ], name: "index_solid_queue_processes_on_name_and_supervisor_id", unique: true
+    t.index [ "supervisor_id" ], name: "index_solid_queue_processes_on_supervisor_id"
+  end
+
+  create_table "solid_queue_ready_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "queue_name", null: false
+    t.integer "priority", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.index [ "job_id" ], name: "index_solid_queue_ready_executions_on_job_id", unique: true
+    t.index [ "priority", "job_id" ], name: "index_solid_queue_poll_all"
+    t.index [ "queue_name", "priority", "job_id" ], name: "index_solid_queue_poll_by_queue"
+  end
+
+  create_table "solid_queue_recurring_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "task_key", null: false
+    t.datetime "run_at", null: false
+    t.datetime "created_at", null: false
+    t.index [ "job_id" ], name: "index_solid_queue_recurring_executions_on_job_id", unique: true
+    t.index [ "task_key", "run_at" ], name: "index_solid_queue_recurring_executions_on_task_key_and_run_at", unique: true
+  end
+
+  create_table "solid_queue_recurring_tasks", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "schedule", null: false
+    t.string "command", limit: 2048
+    t.string "class_name"
+    t.text "arguments"
+    t.string "queue_name"
+    t.integer "priority", default: 0
+    t.boolean "static", default: true, null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [ "key" ], name: "index_solid_queue_recurring_tasks_on_key", unique: true
+    t.index [ "static" ], name: "index_solid_queue_recurring_tasks_on_static"
+  end
+
+  create_table "solid_queue_scheduled_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "queue_name", null: false
+    t.integer "priority", default: 0, null: false
+    t.datetime "scheduled_at", null: false
+    t.datetime "created_at", null: false
+    t.index [ "job_id" ], name: "index_solid_queue_scheduled_executions_on_job_id", unique: true
+    t.index [ "scheduled_at", "priority", "job_id" ], name: "index_solid_queue_dispatch_all"
+  end
+
+  create_table "solid_queue_semaphores", force: :cascade do |t|
+    t.string "key", null: false
+    t.integer "value", default: 1, null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [ "expires_at" ], name: "index_solid_queue_semaphores_on_expires_at"
+    t.index [ "key", "value" ], name: "index_solid_queue_semaphores_on_key_and_value"
+    t.index [ "key" ], name: "index_solid_queue_semaphores_on_key", unique: true
+  end
+
+  create_table "solid_queue_batches", force: :cascade do |t|
+    t.string "active_job_batch_id"
+    t.string "description"
+    t.text "on_finish"
+    t.text "on_success"
+    t.text "on_failure"
+    t.text "metadata"
+    t.integer "total_jobs", default: 0, null: false
+    t.integer "completed_jobs", default: 0, null: false
+    t.integer "failed_jobs", default: 0, null: false
+    t.datetime "enqueued_at"
+    t.datetime "finished_at"
+    t.datetime "failed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [ "active_job_batch_id" ], name: "index_solid_queue_batches_on_active_job_batch_id", unique: true
+    t.index [ "finished_at" ], name: "index_solid_queue_batches_on_finished_at"
+  end
+
+  create_table "solid_queue_batch_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "batch_id", null: false
+    t.datetime "created_at", null: false
+    t.index [ "job_id" ], name: "index_solid_queue_batch_executions_on_job_id", unique: true
+    t.index [ "batch_id" ], name: "index_solid_queue_batch_executions_on_batch_id"
+  end
+
+  add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
+  add_foreign_key "solid_queue_batch_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\schema.rb
+==================================================
+
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[8.1].define(version: 2026_10_23_114454) do
+  create_table "agent_audits", force: :cascade do |t|
+    t.integer "feature_flag_id", null: false
+    t.integer "risk_score"
+    t.string "risk_tier"
+    t.string "action_taken"
+    t.string "execution_status"
+    t.text "reasoning"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_flag_id"], name: "index_agent_audits_on_feature_flag_id"
+  end
+
+  create_table "canary_metrics", force: :cascade do |t|
+    t.integer "feature_flag_id", null: false
+    t.float "error_rate"
+    t.integer "latency_p99"
+    t.integer "crash_count"
+    t.integer "sample_size"
+    t.text "logs_payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_flag_id"], name: "index_canary_metrics_on_feature_flag_id"
+  end
+
+  create_table "feature_flags", force: :cascade do |t|
+    t.string "name"
+    t.string "key"
+    t.text "description"
+    t.string "environment"
+    t.string "status"
+    t.integer "rollout_percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "organization_id", null: false
+    t.string "connected_repo"
+    t.text "code_context"
+    t.index ["organization_id"], name: "index_feature_flags_on_organization_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "cluster_region"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.integer "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_users_on_organization_id"
+  end
+
+  add_foreign_key "agent_audits", "feature_flags"
+  add_foreign_key "canary_metrics", "feature_flags"
+  add_foreign_key "feature_flags", "organizations"
+  add_foreign_key "users", "organizations"
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\seeds.rb
+==================================================
+
+CanaryMetric.destroy_all if defined?(CanaryMetric)
+AgentAudit.destroy_all if defined?(AgentAudit)
+FeatureFlag.destroy_all
+User.destroy_all
+Organization.destroy_all
+
+# Demo Åirket
+org = Organization.create!(
+  name: "Acme Cloud",
+  cluster_region: "US-East (Virginia)"
+)
+
+# Demo KullanÄ±cÄ±
+User.create!(
+  email: "demo@acme.com",
+  password_digest: "secret",
+  organization: org
+)
+
+# Demo Flagler (Kendi Kod BloklarÄ±yla)
+FeatureFlag.create!([
+  {
+    organization: org,
+    name: "Video Transcoder Engine v2",
+    key: "video-transcoder-v2",
+    description: "Next-gen low-latency transcoding pipeline for living room 4K clients.",
+    environment: "production",
+    status: "canary",
+    rollout_percentage: 15,
+    connected_repo: "github.com/acme/transcoder-service",
+    code_context: "fn process_frame(buffer: &mut FrameBuffer) {\n    // Potential memory leak on living room 4K\n    let raw = buffer.as_ptr();\n    unsafe { libc::memcpy(raw, ...); }\n}"
+  },
+  {
+    organization: org,
+    name: "Realtime Bid Auction Gateway",
+    key: "rt-bid-auction-gw",
+    description: "Real-time programmatic ad targeting and auction engine.",
+    environment: "production",
+    status: "canary",
+    rollout_percentage: 5,
+    connected_repo: "github.com/acme/ad-gateway",
+    code_context: "func HandleAuction(w http.ResponseWriter, r *http.Request) {\n    mu.Lock()\n    defer mu.Unlock()\n    // High latency lock contention under spike\n    time.Sleep(300 * time.Millisecond)\n}"
+  },
+  {
+    organization: org,
+    name: "AI Recommendation Ranker",
+    key: "ai-rec-ranker-v1",
+    description: "ML-driven personalized content carousel for logged-in users.",
+    environment: "production",
+    status: "canary",
+    rollout_percentage: 50,
+    connected_repo: "github.com/acme/ml-feed-ranker",
+    code_context: "def rank_candidates(user_id, item_pool):\n    # Heavy vector dot-product without batching\n    scores = [compute_embedding(item) for item in item_pool]\n    return sorted(scores, reverse=True)"
+  }
+])
+
+puts "Veritabani basariyla hazirlandi ve tohumlandi!"
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\migrate\20261019112911_create_feature_flags.rb
+==================================================
+
+class CreateFeatureFlags < ActiveRecord::Migration[8.1]
+  def change
+    create_table :feature_flags do |t|
+      t.string :name
+      t.string :key
+      t.text :description
+      t.string :environment
+      t.string :status
+      t.integer :rollout_percentage
+
+      t.timestamps
+    end
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\migrate\20261019112932_create_canary_metrics.rb
+==================================================
+
+class CreateCanaryMetrics < ActiveRecord::Migration[8.1]
+  def change
+    create_table :canary_metrics do |t|
+      t.references :feature_flag, null: false, foreign_key: true
+      t.float :error_rate
+      t.integer :latency_p99
+      t.integer :crash_count
+      t.integer :sample_size
+      t.text :logs_payload
+
+      t.timestamps
+    end
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\migrate\20261019112942_create_agent_audits.rb
+==================================================
+
+class CreateAgentAudits < ActiveRecord::Migration[8.1]
+  def change
+    create_table :agent_audits do |t|
+      t.references :feature_flag, null: false, foreign_key: true
+      t.integer :risk_score
+      t.string :risk_tier
+      t.string :action_taken
+      t.string :execution_status
+      t.text :reasoning
+      t.text :payload
+
+      t.timestamps
+    end
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\migrate\20261023114419_create_organizations.rb
+==================================================
+
+class CreateOrganizations < ActiveRecord::Migration[8.1]
+  def change
+    create_table :organizations do |t|
+      t.string :name
+      t.string :cluster_region
+
+      t.timestamps
+    end
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\migrate\20261023114436_create_users.rb
+==================================================
+
+class CreateUsers < ActiveRecord::Migration[8.1]
+  def change
+    create_table :users do |t|
+      t.string :email
+      t.string :password_digest
+      t.references :organization, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\db\migrate\20261023114454_add_details_to_feature_flags.rb
+==================================================
+
+class AddDetailsToFeatureFlags < ActiveRecord::Migration[8.1]
+  def change
+    add_reference :feature_flags, :organization, null: false, foreign_key: true
+    add_column :feature_flags, :connected_repo, :string
+    add_column :feature_flags, :code_context, :text
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\test_helper.rb
+==================================================
+
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "rails/test_help"
+
+module ActiveSupport
+  class TestCase
+    # Run tests in parallel with specified workers
+    parallelize(workers: :number_of_processors, with: :threads)
+
+    # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    fixtures :all
+
+    # Add more helper methods to be used by all tests here...
+  end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\controllers\api\v1\feature_flags_controller_test.rb
+==================================================
+
+require "test_helper"
+
+class Api::V1::FeatureFlagsControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\fixtures\agent_audits.yml
+==================================================
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feature_flag: one
+  risk_score: 1
+  risk_tier: MyString
+  action_taken: MyString
+  execution_status: MyString
+  reasoning: MyText
+  payload: MyText
+
+two:
+  feature_flag: two
+  risk_score: 1
+  risk_tier: MyString
+  action_taken: MyString
+  execution_status: MyString
+  reasoning: MyText
+  payload: MyText
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\fixtures\canary_metrics.yml
+==================================================
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feature_flag: one
+  error_rate: 1.5
+  latency_p99: 1
+  crash_count: 1
+  sample_size: 1
+  logs_payload: MyText
+
+two:
+  feature_flag: two
+  error_rate: 1.5
+  latency_p99: 1
+  crash_count: 1
+  sample_size: 1
+  logs_payload: MyText
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\fixtures\feature_flags.yml
+==================================================
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  key: MyString
+  description: MyText
+  environment: MyString
+  status: MyString
+  rollout_percentage: 1
+
+two:
+  name: MyString
+  key: MyString
+  description: MyText
+  environment: MyString
+  status: MyString
+  rollout_percentage: 1
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\fixtures\organizations.yml
+==================================================
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cluster_region: MyString
+
+two:
+  name: MyString
+  cluster_region: MyString
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\fixtures\users.yml
+==================================================
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  password_digest: MyString
+  organization: one
+
+two:
+  email: MyString
+  password_digest: MyString
+  organization: two
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\models\agent_audit_test.rb
+==================================================
+
+require "test_helper"
+
+class AgentAuditTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\models\canary_metric_test.rb
+==================================================
+
+require "test_helper"
+
+class CanaryMetricTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\models\feature_flag_test.rb
+==================================================
+
+require "test_helper"
+
+class FeatureFlagTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\models\organization_test.rb
+==================================================
+
+require "test_helper"
+
+class OrganizationTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-api\test\models\user_test.rb
+==================================================
+
+require "test_helper"
+
+class UserTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\AGENTS.md
+==================================================
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes â€” APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` â€” verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\next-env.d.ts
+==================================================
+
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+import "./.next/dev/types/routes.d.ts";
+import "./.next/dev/types/root-params.d.ts";
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\next.config.ts
+==================================================
+
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  cacheComponents: true,
+  partialPrefetching: true,
+  turbopack: {
+    rules: {
+      "*.css": {
+        loaders: ["@tailwindcss/turbopack"],
+        as: "*.css",
+      },
+    },
+  },
+};
+
+export default nextConfig;
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\package.json
+==================================================
+
+{
+  "name": "vaneai-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "lucide-react": "^1.59.0",
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\README.md
+==================================================
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\tsconfig.json
+==================================================
+
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\layout.tsx
+==================================================
+
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "VaneAI â€” Autonomous Canary Guardrail Engine",
+  description: "Autonomous self-healing canary release and real-time incident mitigation platform.",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="bg-[#04070c] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
+        {children}
+      </body>
+    </html>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\page.tsx
+==================================================
+
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import Navbar from "@/components/Navbar";
+import FlagList from "@/components/FlagList";
+import TelemetryPanel from "@/components/TelemetryPanel";
+import CodeContextViewer from "@/components/CodeContextViewer";
+import AuditTrail from "@/components/AuditTrail";
+import ImportFlagModal from "@/components/ImportFlagModal";
+import { FeatureFlag, Organization, TelemetryData } from "@/types";
+
+interface RemediationState {
+  tier: "yellow" | "red" | "nominal";
+  rootCause: string;
+  reasoning: string;
+  diff: string | null;
+  appliedAt?: string;
+}
+
+export default function Home() {
+  const [org, setOrg] = useState<Organization | null>({
+    id: 1,
+    name: "Acme Cloud",
+    cluster_region: "US-East (Virginia)",
+  });
+  const [flags, setFlags] = useState<FeatureFlag[]>([]);
+  const [selectedFlag, setSelectedFlag] = useState<FeatureFlag | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [telemetry, setTelemetry] = useState<TelemetryData>({
+    errorRate: 0.04,
+    p99Latency: 110,
+    activeCrashes: 0,
+    canarySample: "25.000 reqs",
+  });
+
+  const [logs, setLogs] = useState<string[]>([]);
+  const [remediation, setRemediation] = useState<RemediationState | null>(null);
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const currentRolloutRef = useRef<number>(5);
+  const isHaltedRef = useRef<boolean>(false);
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+  useEffect(() => {
+    if (selectedFlag) {
+      currentRolloutRef.current = selectedFlag.rollout_percentage || 5;
+    }
+  }, [selectedFlag]);
+
+  const fetchFlags = async () => {
+    setIsRefreshing(true);
+    try {
+      const res = await fetch(`${apiUrl}/api/v1/feature_flags`);
+      if (res.ok) {
+        const data: FeatureFlag[] = await res.json();
+        setFlags(data);
+        if (data.length > 0 && !selectedFlag) {
+          setSelectedFlag(data[0]);
+          currentRolloutRef.current = data[0].rollout_percentage || 5;
+        } else if (selectedFlag) {
+          const updated = data.find((f) => f.id === selectedFlag.id);
+          if (updated) {
+            setSelectedFlag(updated);
+            currentRolloutRef.current = updated.rollout_percentage || 5;
+          }
+        }
+      }
+    } catch (err) {
+      console.error("API Fetch Error:", err);
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchFlags();
+  }, []);
+
+  const stopSimulation = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    isHaltedRef.current = true;
+    setIsSimulating(false);
+  };
+
+  // Ã‡erezden GitHub token'Ä±nÄ± okuma
+  const getGithubToken = () => {
+    if (typeof document === "undefined") return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; gh_token=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+    return null;
+  };
+
+  // SARI DURUM: Arka planda sessizce GitHub'a commit atan otonom fonksiyon
+  const executeAutonomousBackgroundCommit = async (flagId: number, patchedCode: string) => {
+    const token = getGithubToken();
+    if (!token) return;
+
+    try {
+      await fetch(`${apiUrl}/api/v1/remediations/apply`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-GitHub-Token": token,
+        },
+        body: JSON.stringify({
+          feature_flag_id: flagId,
+          file_path: "app/service.py",
+          patched_code: patchedCode,
+        }),
+      });
+    } catch (e) {
+      console.error("Background commit error:", e);
+    }
+  };
+
+  const scheduleNextTick = () => {
+    if (isHaltedRef.current || currentRolloutRef.current >= 100) {
+      stopSimulation();
+      return;
+    }
+
+    timerRef.current = setTimeout(async () => {
+      if (isHaltedRef.current || currentRolloutRef.current >= 100) return;
+
+      const rand = Math.random();
+      let selectedType: "crash" | "latency" | "healthy" = "healthy";
+
+      if (rand < 0.55) {
+        selectedType = "healthy";
+      } else if (rand < 0.8) {
+        selectedType = "latency";
+      } else {
+        selectedType = "crash";
+      }
+
+      await triggerSimulation(selectedType);
+
+      // KÄ±rmÄ±zÄ± devre kesici tetiklenmediyse akmaya devam et
+      if (!isHaltedRef.current && currentRolloutRef.current < 100) {
+        scheduleNextTick();
+      }
+    }, 4500);
+  };
+
+  const startSimulation = () => {
+    if (!selectedFlag || (remediation && remediation.tier === "red")) return;
+    if (currentRolloutRef.current >= 100) return;
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+
+    isHaltedRef.current = false;
+    setIsSimulating(true);
+    scheduleNextTick();
+  };
+
+  const triggerSimulation = async (type: "crash" | "latency" | "healthy") => {
+    if (!selectedFlag || isHaltedRef.current) return;
+
+    if (currentRolloutRef.current >= 100 && type !== "crash") {
+      stopSimulation();
+      return;
+    }
+
+    let payload = {
+      feature_flag_id: selectedFlag.id,
+      error_rate: 0.04,
+      latency_p99: 115,
+      crash_count: 0,
+    };
+
+    if (type === "crash") {
+      payload = {
+        feature_flag_id: selectedFlag.id,
+        error_rate: 5.2,
+        latency_p99: 720,
+        crash_count: 94,
+      };
+      setTelemetry({
+        errorRate: 5.2,
+        p99Latency: 720,
+        activeCrashes: 94,
+        canarySample: "48.000 reqs",
+      });
+    } else if (type === "latency") {
+      payload = {
+        feature_flag_id: selectedFlag.id,
+        error_rate: 0.95,
+        latency_p99: 440,
+        crash_count: 0,
+      };
+      setTelemetry({
+        errorRate: 0.95,
+        p99Latency: 440,
+        activeCrashes: 0,
+        canarySample: "36.000 reqs",
+      });
+    } else {
+      setTelemetry({
+        errorRate: 0.02,
+        p99Latency: 95,
+        activeCrashes: 0,
+        canarySample: "55.000 reqs",
+      });
+    }
+
+    try {
+      const res = await fetch(`${apiUrl}/api/v1/simulate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Simulation failed with status ${res.status}`);
+      }
+
+      const data = await res.json();
+      const timeStr = new Date().toLocaleTimeString();
+
+      // 1. SARI SEVÄ°YE: OTONOM SELF-HEAL (Ä°nsan onayÄ± yok, ekrana yama kodu basÄ±lÄ±r, arka planda commit atÄ±lÄ±r)
+      if (data.tier === "yellow") {
+        setRemediation({
+          tier: "yellow",
+          rootCause: data.root_cause,
+          reasoning: data.reasoning,
+          diff: data.diff,
+          appliedAt: timeStr,
+        });
+
+        const nextRollout = Math.min(currentRolloutRef.current + 15, 100);
+        currentRolloutRef.current = nextRollout;
+
+        // DÃ¼zeltilmiÅŸ yeni kodu al
+        const updatedCode = data.patched_code || selectedFlag.code_context;
+
+        // Sol paneldeki canlÄ± kodu hemen gÃ¼ncellenmiÅŸ kodla deÄŸiÅŸtir
+        setSelectedFlag((prev) =>
+          prev ? { ...prev, rollout_percentage: nextRollout, code_context: updatedCode } : null
+        );
+        setFlags((prev) =>
+          prev.map((f) =>
+            f.id === selectedFlag.id ? { ...f, rollout_percentage: nextRollout, code_context: updatedCode } : f
+          )
+        );
+
+        // Arka planda sessizce GitHub'a commit at
+        if (data.patched_code) {
+          executeAutonomousBackgroundCommit(selectedFlag.id, data.patched_code);
+        }
+
+        setLogs((prev) => [
+          `[${timeStr}] âš¡ AUTONOMOUS_SELF_HEAL (Risk Score: ${data.risk_score}/100)\n` +
+            `â€¢ Root Cause: ${data.root_cause}\n` +
+            `â€¢ Remediation: ${data.reasoning}\n` +
+            `â€¢ Action: Patch committed to GitHub branch silently in background.\n` +
+            `â€¢ Active Code Refreshed with Bounded Buffer.\n` +
+            `âœ“ Canary progression continuing without downtime... (${nextRollout}%)`,
+          ...prev,
+        ]);
+
+        setTimeout(() => {
+          if (!isHaltedRef.current) {
+            setTelemetry((t) => ({ ...t, p99Latency: 110, errorRate: 0.03 }));
+          }
+        }, 1200);
+
+        if (nextRollout >= 100) {
+          stopSimulation();
+          setLogs((prev) => [
+            `[${timeStr}] ğŸ† FULL_RELEASE: Flag successfully scaled to 100% rollout with zero downtime!`,
+            ...prev,
+          ]);
+        }
+
+      // 2. KIRMIZI SEVÄ°YE: DEVRE KESÄ°CÄ° (DÃ¶ngÃ¼ durur, saÄŸ panel kÄ±rmÄ±zÄ± diff basar, insan mÃ¼hendis onayÄ± ister)
+      } else if (data.tier === "red") {
+        stopSimulation();
+
+        setRemediation({
+          tier: "red",
+          rootCause: data.root_cause,
+          reasoning: data.reasoning,
+          diff: data.diff,
+          appliedAt: timeStr,
+        });
+
+        setLogs((prev) => [
+          `[${timeStr}] ğŸš¨ CRITICAL_GUARDRAIL_HOLD (Risk Score: ${data.risk_score}/100)\n` +
+            `â€¢ Root Cause: ${data.root_cause}\n` +
+            `â€¢ Guardrail Policy: ${data.reasoning}\n` +
+            `! CIRCUIT BREAKER TRIPPED: Autonomous loop halted immediately.\n` +
+            `! High-risk architectural change requires human engineer sign-off.`,
+          ...prev,
+        ]);
+
+        setSelectedFlag((prev) => (prev ? { ...prev, status: "investigating" } : null));
+        setFlags((prev) =>
+          prev.map((f) => (f.id === selectedFlag.id ? { ...f, status: "investigating" } : f))
+        );
+
+      // 3. YEÅÄ°L SEVÄ°YE: NORMAL Ä°LERLEME
+      } else {
+        const nextRollout = Math.min(currentRolloutRef.current + 15, 100);
+        currentRolloutRef.current = nextRollout;
+
+        setSelectedFlag((prev) => (prev ? { ...prev, rollout_percentage: nextRollout, status: "canary" } : null));
+        setFlags((prev) =>
+          prev.map((f) => (f.id === selectedFlag.id ? { ...f, rollout_percentage: nextRollout, status: "canary" } : f))
+        );
+
+        setLogs((prev) => [
+          `[${timeStr}] PROCEED_ROLLOUT (Risk Score: ${data.risk_score}/100): Telemetry healthy. Traffic scaled to ${nextRollout}%.`,
+          ...prev,
+        ]);
+
+        if (nextRollout >= 100) {
+          stopSimulation();
+          setLogs((prev) => [
+            `[${timeStr}] ğŸ† FULL_RELEASE: Canary rollout successfully reached 100% target!`,
+            ...prev,
+          ]);
+        }
+      }
+    } catch (err) {
+      console.error("Simulation Execution Error:", err);
+    }
+  };
+
+  const handleResetFlag = () => {
+    if (!selectedFlag) return;
+    stopSimulation();
+    isHaltedRef.current = false;
+    currentRolloutRef.current = 5;
+    setSelectedFlag((prev) => (prev ? { ...prev, status: "canary", rollout_percentage: 5 } : null));
+    setFlags((prev) =>
+      prev.map((f) => (f.id === selectedFlag.id ? { ...f, status: "canary", rollout_percentage: 5 } : f))
+    );
+    setTelemetry({
+      errorRate: 0.04,
+      p99Latency: 110,
+      activeCrashes: 0,
+      canarySample: "10.000 reqs",
+    });
+    setRemediation(null);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#04070c] text-slate-100 flex flex-col font-sans">
+      <Navbar org={org} onRefresh={fetchFlags} isRefreshing={isRefreshing} />
+
+      <div className="flex flex-1 overflow-hidden">
+        <FlagList
+          flags={flags}
+          selectedFlag={selectedFlag}
+          onSelect={(f) => {
+            stopSimulation();
+            setSelectedFlag(f);
+            currentRolloutRef.current = f.rollout_percentage || 5;
+            setRemediation(null);
+          }}
+          onOpenModal={() => setIsModalOpen(true)}
+        />
+
+        <main className="flex-1 overflow-y-auto p-6 space-y-6">
+          <TelemetryPanel
+            flag={selectedFlag}
+            telemetry={telemetry}
+            isSimulating={isSimulating}
+            onStartSimulation={startSimulation}
+            onStopSimulation={stopSimulation}
+            onResetFlag={handleResetFlag}
+            onTriggerScenario={triggerSimulation}
+          />
+
+          
+          <CodeContextViewer
+            flag={selectedFlag}
+            aiRemediationCode={remediation?.diff}
+            tier={remediation?.tier}
+          />
+
+          <AuditTrail logs={logs} />
+        </main>
+      </div>
+
+      <ImportFlagModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreated={(newFlag) => {
+          setFlags((prev) => [newFlag, ...prev]);
+          setSelectedFlag(newFlag);
+          currentRolloutRef.current = newFlag.rollout_percentage || 5;
+        }}
+        organizationId={org?.id}
+      />
+    </div>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\api\auth\github\callback\route.ts
+==================================================
+
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const code = searchParams.get("code");
+
+  if (!code) {
+    return NextResponse.redirect(new URL("/?github_error=missing_code", request.url));
+  }
+
+  const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
+  const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+
+  try {
+    const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+      }),
+    });
+
+    const tokenData = await tokenResponse.json();
+
+    if (tokenData.error || !tokenData.access_token) {
+      console.error("GitHub OAuth Error:", tokenData);
+      return NextResponse.redirect(new URL("/?github_error=auth_failed", request.url));
+    }
+
+    const response = NextResponse.redirect(new URL("/?github_connected=true", request.url));
+
+    // Token'Ä± 7 gÃ¼nlÃ¼k cookie olarak kaydediyoruz
+    response.cookies.set("gh_token", tokenData.access_token, {
+      httpOnly: false, // Ä°stemci tarafÄ±nda kontrol edilebilmesi iÃ§in
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("GitHub Callback Exception:", error);
+    return NextResponse.redirect(new URL("/?github_error=server_error", request.url));
+  }
+}
+
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\api\auth\github\file\route.ts
+==================================================
+
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const code = request.nextUrl.searchParams.get("code");
+  const baseUrl = "http://localhost:3000";
+
+  if (!code) {
+    return NextResponse.redirect(`${baseUrl}?github_error=missing_code`);
+  }
+
+  const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
+  const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+
+  try {
+    const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+      }),
+    });
+
+    const tokenData = await tokenRes.json();
+
+    if (tokenData.error || !tokenData.access_token) {
+      console.error("GitHub OAuth error:", tokenData);
+      return NextResponse.redirect(`${baseUrl}?github_error=${tokenData.error || "failed"}`);
+    }
+
+    const response = NextResponse.redirect(`${baseUrl}?github_connected=true`);
+    response.cookies.set("gh_token", tokenData.access_token, {
+      path: "/",
+      httpOnly: false,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 gÃ¼n
+    });
+
+    return response;
+  } catch (err) {
+    console.error("OAuth exception:", err);
+    return NextResponse.redirect(`${baseUrl}?github_error=internal_exception`);
+  }
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\api\auth\github\logout\route.ts
+==================================================
+
+import { NextResponse } from "next/server";
+
+export async function POST() {
+  const response = NextResponse.json({ success: true, message: "Logged out from GitHub." });
+
+  // gh_token Ã§erezini sÃ¼resini geÃ§miÅŸ olarak iÅŸaretleyip siliyoruz
+  response.cookies.set("gh_token", "", {
+    path: "/",
+    maxAge: 0,
+  });
+
+  return response;
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\api\github\file\route.ts
+==================================================
+
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  let repo = searchParams.get("repo");
+  const path = searchParams.get("path") || "app/service.py";
+  const token = request.cookies.get("gh_token")?.value;
+
+  if (!token) {
+    return NextResponse.json({ error: "Missing GitHub access token." }, { status: 401 });
+  }
+
+  if (!repo) {
+    return NextResponse.json({ error: "Missing repo parameter." }, { status: 400 });
+  }
+
+  // URL ve Ã¶n ekleri temizle
+  const cleanRepo = decodeURIComponent(repo)
+    .replace(/^https?:\/\//, "")
+    .replace(/^github\.com\//, "")
+    .trim();
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${cleanRepo}/contents/${path}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: `File '${path}' could not be resolved in '${cleanRepo}'.` },
+        { status: res.status }
+      );
+    }
+
+    const data = await res.json();
+
+    if (data.type !== "file" || !data.content) {
+      return NextResponse.json(
+        { error: `The path '${path}' does not point to a valid file.` },
+        { status: 400 }
+      );
+    }
+
+    const decodedContent = Buffer.from(data.content, "base64").toString("utf-8");
+
+    return NextResponse.json({
+      content: decodedContent,
+      path: data.path,
+      sha: data.sha,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "Internal server error." }, { status: 500 });
+  }
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\app\api\github\repos\route.ts
+==================================================
+
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const token = request.cookies.get("gh_token")?.value;
+
+  if (!token) {
+    return NextResponse.json({ error: "Unauthorized. Missing GitHub token." }, { status: 401 });
+  }
+
+  try {
+    const response = await fetch("https://api.github.com/user/repos?sort=updated&per_page=100", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json",
+      },
+    });
+
+    if (!response.ok) {
+      return NextResponse.json({ error: "Failed to fetch repositories from GitHub." }, { status: response.status });
+    }
+
+    const repos = await response.json();
+
+    // Sadece ihtiyacÄ±mÄ±z olan alanlarÄ± dÃ¶nÃ¼yoruz
+    const formattedRepos = repos.map((repo: any) => ({
+      id: repo.id,
+      name: repo.name,
+      full_name: repo.full_name,
+      default_branch: repo.default_branch,
+      html_url: repo.html_url,
+    }));
+
+    return NextResponse.json(formattedRepos);
+  } catch (error) {
+    console.error("GitHub Repos Fetch Error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\components\AuditTrail.tsx
+==================================================
+
+"use client";
+
+import React from "react";
+
+interface Props {
+  logs: string[];
+}
+
+export default function AuditTrail({ logs }: Props) {
+  return (
+    <div className="rounded-2xl border border-slate-800/80 bg-[#090d16]/90 p-5 backdrop-blur-md">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-xs text-emerald-400">&gt;_</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Agent Decision & Audit Trail (Harness Engine)
+          </span>
+        </div>
+        <span className="font-mono text-[11px] text-slate-500">Model: Groq / LLaMA-3 Guardrail</span>
+      </div>
+
+      <div className="mt-3 h-44 overflow-y-auto rounded-xl border border-slate-800 bg-[#05080d] p-3 font-mono text-xs space-y-2">
+        {logs.length === 0 ? (
+          <div className="text-slate-600">No telemetry events evaluated yet. Start the autonomous loop.</div>
+        ) : (
+          logs.map((log, idx) => (
+            <div key={idx} className="leading-relaxed text-slate-300 whitespace-pre-wrap">
+              {log}
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\components\CodeContextViewer.tsx
+==================================================
+
+"use client";
+
+import React, { useState } from "react";
+import { FeatureFlag } from "@/types";
+
+interface Props {
+  flag: FeatureFlag | null;
+  aiRemediationCode?: string | null;
+  tier?: "yellow" | "red" | "nominal" | null;
+}
+
+export default function CodeContextViewer({
+  flag,
+  aiRemediationCode,
+  tier = "nominal",
+}: Props) {
+  const [isApplying, setIsApplying] = useState(false);
+  const [successUrl, setSuccessUrl] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  if (!flag) {
+    return (
+      <div className="panel-surface flex h-48 items-center justify-center font-mono text-xs text-slate-500">
+        No microservice context loaded. Select an active flag from the inventory.
+      </div>
+    );
+  }
+
+  const getGithubToken = () => {
+    if (typeof document === "undefined") return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; gh_token=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+    return null;
+  };
+
+  const handleApplyHotfix = async () => {
+    const token = getGithubToken();
+    if (!token) {
+      alert("GitHub access token not found. Please connect your GitHub account via the Import Flag modal first.");
+      return;
+    }
+
+    if (!aiRemediationCode) {
+      alert("No autonomous remediation code generated to commit.");
+      return;
+    }
+
+    setIsApplying(true);
+    setErrorMsg(null);
+    setSuccessUrl(null);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+    try {
+      const res = await fetch(`${apiUrl}/api/v1/remediations/apply`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-GitHub-Token": token,
+        },
+        body: JSON.stringify({
+          feature_flag_id: flag.id,
+          file_path: "app/service.py",
+          patched_code: aiRemediationCode,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to commit hotfix to GitHub.");
+      }
+
+      const prUrl = data.data?.pr_url;
+      if (prUrl) {
+        setSuccessUrl(prUrl);
+        window.open(prUrl, "_blank");
+      }
+    } catch (err: any) {
+      console.error("Hotfix deployment error:", err);
+      setErrorMsg(err.message || "An unexpected error occurred during hotfix deployment.");
+    } finally {
+      setIsApplying(false);
+    }
+  };
+
+  const isRed = tier === "red";
+  const isYellow = tier === "yellow";
+
+  return (
+    <div className="panel-surface">
+      {/* Ãœst BaÅŸlÄ±k ve BaÄŸlÄ± Depo Bilgisi */}
+      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Connected Repository & Source Context
+          </span>
+          <span className="rounded-full border border-slate-700 bg-slate-900/60 px-2.5 py-0.5 font-mono text-[11px] text-slate-300">
+            {flag.connected_repo || "github.com/acme/unassigned-service"}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {successUrl && (
+            <a
+              href={successUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-emerald-400 underline hover:text-emerald-300"
+            >
+              View Opened PR â†—
+            </a>
+          )}
+          <span className="text-[11px] font-mono text-slate-500">
+            {isRed
+              ? "Critical Incident Active"
+              : isYellow
+              ? "Autonomous Self-Healing Active"
+              : "Standby (Nominal Baseline)"}
+          </span>
+        </div>
+      </div>
+
+      {errorMsg && (
+        <div className="mt-2 rounded-lg border border-rose-500/30 bg-rose-950/20 p-2.5 text-xs text-rose-300">
+          {errorMsg}
+        </div>
+      )}
+
+      {/* Kod KarÅŸÄ±laÅŸtÄ±rma IzgarasÄ± */}
+      <div className="mt-3 grid grid-cols-2 gap-4">
+        {/* CanlÄ± Ãœretim Kodu */}
+        <div>
+          <div className="mb-1.5 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Active Production Code</span>
+            <span className="font-mono text-slate-500">Live Branch Mirror</span>
+          </div>
+          <pre className="h-56 overflow-x-auto rounded-xl border border-slate-800 bg-[#0a0e17] p-3.5 font-mono text-xs leading-relaxed text-slate-300">
+            <code>
+              {flag.code_context ||
+                `// No code snippet mapped for this release.\n// Please configure entrypoint context in canary flag settings.`}
+            </code>
+          </pre>
+        </div>
+
+        {/* AI Otonom Hotfix Diff Penceresi (SarÄ± ve KÄ±rmÄ±zÄ± Durum Renkleri) */}
+        <div>
+          <div className="mb-1.5 flex items-center justify-between text-[11px] text-slate-400">
+            <span>AI Self-Healing Hotfix Engine</span>
+            {isRed && (
+              <span className="rounded bg-rose-500/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-rose-400 border border-rose-500/20">
+                CRITICAL DIFF GENERATED
+              </span>
+            )}
+            {isYellow && (
+              <span className="rounded bg-amber-500/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-amber-400 border border-amber-500/20">
+                AUTONOMOUS OPTIMIZATION DIFF
+              </span>
+            )}
+          </div>
+          <pre
+            className={`h-56 overflow-x-auto rounded-xl border p-3.5 font-mono text-xs leading-relaxed transition-all duration-300 ${
+              isRed
+                ? "border-rose-500/40 bg-rose-950/15 text-rose-200"
+                : isYellow
+                ? "border-amber-500/40 bg-amber-950/15 text-amber-200"
+                : "border-slate-800 bg-[#0a0e17] text-slate-500"
+            }`}
+          >
+            <code>
+              {aiRemediationCode ||
+                `// System healthy. Realtime diff generator in standby mode.\n// Anomalies will trigger contextual patches here automatically.`}
+            </code>
+          </pre>
+        </div>
+      </div>
+
+      {/* Sadece KÄ±rmÄ±zÄ± Durumda Ã‡Ä±kan Onay ve PR AÃ§ma Butonu */}
+      {isRed && (
+        <div className="mt-3 flex items-center justify-between rounded-xl border border-rose-500/30 bg-rose-950/20 px-4 py-3">
+          <div className="text-xs text-rose-200">
+            <span className="font-semibold text-rose-400">Action Required:</span> Autonomous patch generated to arrest
+            canary failure. Deploying creates a dedicated hotfix branch and PR.
+          </div>
+          <button
+            onClick={handleApplyHotfix}
+            disabled={isApplying}
+            className="flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-emerald-500 disabled:opacity-50"
+          >
+            {isApplying ? (
+              <>
+                <span className="h-2 w-2 rounded-full bg-white animate-ping" />
+                Committing to GitHub...
+              </>
+            ) : (
+              "Approve & Deploy Hotfix PR"
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* SarÄ± Durumda Ã‡Ä±kan Bilgilendirme Ã‡ubuÄŸu (Butonsuz, KendiliÄŸinden Ä°lerler) */}
+      {isYellow && (
+        <div className="mt-3 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-950/20 px-4 py-2.5">
+          <div className="text-xs text-amber-200 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+            <span>
+              <strong className="text-amber-400">Self-Healing In Progress:</strong> Low-risk latency patch committed to branch. Canary traffic expanding seamlessly.
+            </span>
+          </div>
+          <span className="font-mono text-[11px] text-amber-400/80">Zero Downtime Applied</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\components\FlagList.tsx
+==================================================
+
+"use client";
+
+import React from "react";
+import { FeatureFlag } from "@/types";
+
+interface Props {
+  flags: FeatureFlag[];
+  selectedFlag: FeatureFlag | null;
+  onSelect: (flag: FeatureFlag) => void;
+  onOpenModal: () => void;
+}
+
+export default function FlagList({ flags, selectedFlag, onSelect, onOpenModal }: Props) {
+  return (
+    <aside className="w-80 border-r border-slate-800 bg-[#070a0f] p-4 flex flex-col justify-between">
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span>ACTIVE CANARY FLAGS</span>
+          </div>
+          <span className="text-xs text-slate-500">{flags.length} Managed</span>
+        </div>
+
+        <button
+          onClick={onOpenModal}
+          className="w-full mb-4 flex items-center justify-center gap-2 rounded-lg border border-dashed border-emerald-500/40 bg-emerald-500/5 px-3 py-2 text-xs font-medium text-emerald-400 hover:bg-emerald-500/10 transition-colors"
+        >
+          <span>+ Import New Feature Flag</span>
+        </button>
+
+        <div className="space-y-2">
+          {flags.map((flag) => {
+            const isSelected = selectedFlag?.id === flag.id;
+            const isKilled = flag.status === "killed";
+
+            return (
+              <div
+                key={flag.id}
+                onClick={() => onSelect(flag)}
+                className={`cursor-pointer rounded-xl border p-3 transition-all ${
+                  isSelected
+                    ? "border-emerald-500/50 bg-emerald-500/5 shadow-sm"
+                    : "border-slate-800 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/80"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <h4 className="text-sm font-semibold text-slate-200 leading-tight">{flag.name}</h4>
+                  <span
+                    className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+                      isKilled
+                        ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                        : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    }`}
+                  >
+                    {isKilled ? "OFF (KILLED)" : `${flag.rollout_percentage}% ROLLOUT`}
+                  </span>
+                </div>
+                <p className="mt-1 text-xs text-slate-500 line-clamp-2">
+                  {flag.description || flag.connected_repo || "Connected microservice endpoint"}
+                </p>
+                <div className="mt-2 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+                  <div
+                    className={`h-full transition-all duration-300 ${isKilled ? "bg-rose-500" : "bg-emerald-500"}`}
+                    style={{ width: isKilled ? "100%" : `${flag.rollout_percentage}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\components\ImportFlagModal.tsx
+==================================================
+
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { FeatureFlag } from "@/types";
+
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  onCreated: (flag: FeatureFlag) => void;
+  organizationId?: number;
+}
+
+interface GithubRepo {
+  id: number;
+  name: string;
+  full_name: string;
+  default_branch: string;
+  html_url: string;
+}
+
+export default function ImportFlagModal({
+  isOpen,
+  onClose,
+  onCreated,
+  organizationId = 1,
+}: Props) {
+  const [name, setName] = useState("");
+  const [key, setKey] = useState("");
+  const [connectedRepo, setConnectedRepo] = useState("");
+  const [targetFilePath, setTargetFilePath] = useState("app/service.py");
+  const [codeContext, setCodeContext] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // GitHub State
+  const [isConnected, setIsConnected] = useState(false);
+  const [repos, setRepos] = useState<GithubRepo[]>([]);
+  const [isLoadingRepos, setIsLoadingRepos] = useState(false);
+  const [isDisconnecting, setIsDisconnecting] = useState(false);
+  const [isLoadingFile, setIsLoadingFile] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const hasToken = typeof document !== "undefined" && document.cookie.includes("gh_token=");
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (hasToken || urlParams.get("github_connected") === "true") {
+      setIsConnected(true);
+      fetchGithubRepos();
+    }
+  }, [isOpen]);
+
+  const fetchGithubRepos = async () => {
+    setIsLoadingRepos(true);
+    try {
+      const res = await fetch("/api/github/repos");
+      if (res.ok) {
+        const data = await res.json();
+        setRepos(data);
+      } else {
+        setIsConnected(false);
+      }
+    } catch (err) {
+      console.error("Failed to load GitHub repositories:", err);
+    } finally {
+      setIsLoadingRepos(false);
+    }
+  };
+
+  const handleConnectGithub = () => {
+    const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
+    const redirectUri = encodeURIComponent("http://localhost:3000/api/auth/github/callback");
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=repo&prompt=select_account`;
+  };
+
+  const handleDisconnectGithub = async () => {
+    setIsDisconnecting(true);
+    try {
+      await fetch("/api/auth/github/logout", { method: "POST" });
+      setIsConnected(false);
+      setRepos([]);
+      setConnectedRepo("");
+      setCodeContext("");
+    } catch (err) {
+      console.error("Failed to terminate GitHub session:", err);
+    } finally {
+      setIsDisconnecting(false);
+    }
+  };
+
+  // Depodan belirli bir dosyayÄ± dinamik Ã§eken fonksiyon
+  const fetchFileFromRepo = async (repoFullName: string, filePath: string) => {
+    if (!repoFullName || !filePath) return;
+
+    setIsLoadingFile(true);
+    try {
+      const cleanRepo = repoFullName.replace(/^github\.com\//, "");
+      const res = await fetch(`/api/github/file?repo=${encodeURIComponent(cleanRepo)}&path=${encodeURIComponent(filePath)}`);
+      
+      if (res.ok) {
+        const fileData = await res.json();
+        setCodeContext(fileData.content || "");
+      } else {
+        const errData = await res.json();
+        setCodeContext(`// ${errData.error || `Source file '${filePath}' was not found in '${cleanRepo}'.`}\n// You may write or paste the monitored entrypoint manually.`);
+      }
+    } catch (err) {
+      setCodeContext("// An unexpected network error occurred while resolving source context.");
+    } finally {
+      setIsLoadingFile(false);
+    }
+  };
+
+  const handleSelectRepo = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = e.target.value;
+    setConnectedRepo(selected);
+
+    if (!selected) {
+      setCodeContext("");
+      return;
+    }
+
+    const repoShortName = selected.split("/")[1] || selected;
+    setName(`${repoShortName.replace(/[-_]/g, " ").toUpperCase()} CANARY`);
+    setKey(`${repoShortName.toLowerCase()}-release`);
+
+    fetchFileFromRepo(selected, targetFilePath);
+  };
+
+  const handleFilePathBlur = () => {
+    if (connectedRepo && targetFilePath.trim()) {
+      fetchFileFromRepo(connectedRepo, targetFilePath.trim());
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMsg(null);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+    try {
+      const res = await fetch(`${apiUrl}/api/v1/feature_flags`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          feature_flag: {
+            organization_id: organizationId,
+            name,
+            key,
+            connected_repo: connectedRepo,
+            code_context: codeContext,
+            rollout_percentage: 5,
+            status: "canary",
+          },
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.errors ? errData.errors.join(", ") : "Failed to register feature flag.");
+      }
+
+      const created = await res.json();
+      onCreated(created);
+      onClose();
+      setName("");
+      setKey("");
+      setConnectedRepo("");
+      setCodeContext("");
+    } catch (err: any) {
+      setErrorMsg(err.message || "An unexpected error occurred during registration.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+      <div className="w-full max-w-2xl rounded-2xl border border-slate-800 bg-[#0a0e17] p-6 shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div>
+            <h3 className="text-base font-semibold text-slate-100">Connect Repository & Feature Flag</h3>
+            <p className="text-xs text-slate-400">Map your microservice repository directly for autonomous remediation.</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition"
+          >
+            âœ•
+          </button>
+        </div>
+
+        {errorMsg && (
+          <div className="mt-4 rounded-lg border border-rose-500/30 bg-rose-950/20 p-3 text-xs text-rose-300">
+            {errorMsg}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+          {/* GitHub Auth Section */}
+          <div className="rounded-xl border border-slate-800 bg-[#101623] p-4">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                GitHub Organization / Account
+              </span>
+              {!isConnected ? (
+                <button
+                  type="button"
+                  onClick={handleConnectGithub}
+                  className="flex items-center gap-2 rounded-lg bg-slate-800 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700 transition"
+                >
+                  <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                  </svg>
+                  Connect GitHub
+                </button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    GitHub Authorized
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleDisconnectGithub}
+                    disabled={isDisconnecting}
+                    className="flex items-center gap-1 rounded-full border border-rose-500/40 bg-rose-500/10 px-2.5 py-0.5 text-[11px] font-medium text-rose-400 hover:bg-rose-500/20 hover:border-rose-500 transition disabled:opacity-50"
+                  >
+                    <span>âœ• Disconnect</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {isConnected ? (
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Select Target Repository</label>
+                <select
+                  value={connectedRepo}
+                  onChange={handleSelectRepo}
+                  disabled={isLoadingRepos}
+                  className="w-full rounded-lg border border-slate-700 bg-[#0a0e17] px-3 py-2 text-xs text-slate-200 focus:border-slate-500 focus:outline-none"
+                >
+                  <option value="">
+                    {isLoadingRepos ? "Fetching repositories from GitHub..." : "-- Choose a repository --"}
+                  </option>
+                  {repos.map((r) => (
+                    <option key={r.id} value={`github.com/${r.full_name}`}>
+                      {r.full_name} ({r.default_branch})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Connected Repository (Manual Entry)</label>
+                <input
+                  type="text"
+                  placeholder="github.com/acme/payment-service"
+                  value={connectedRepo}
+                  onChange={(e) => setConnectedRepo(e.target.value)}
+                  className="w-full rounded-lg border border-slate-700 bg-[#0a0e17] px-3 py-2 text-xs text-slate-200 focus:border-slate-500 focus:outline-none"
+                  required
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-slate-400 mb-1">Release Name</label>
+              <input
+                type="text"
+                placeholder="e.g. Settlement Engine"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-lg border border-slate-700 bg-[#0a0e17] px-3 py-2 text-xs text-slate-200 focus:border-slate-500 focus:outline-none"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-slate-400 mb-1">Flag Key</label>
+              <input
+                type="text"
+                placeholder="e.g. settlement-v2"
+                value={key}
+                onChange={(e) => setKey(e.target.value)}
+                className="w-full rounded-lg border border-slate-700 bg-[#0a0e17] px-3 py-2 text-xs text-slate-200 focus:border-slate-500 focus:outline-none"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-slate-400 mb-1">Target File Entrypoint</label>
+              <input
+                type="text"
+                placeholder="app/service.py"
+                value={targetFilePath}
+                onChange={(e) => setTargetFilePath(e.target.value)}
+                onBlur={handleFilePathBlur}
+                className="w-full rounded-lg border border-slate-700 bg-[#0a0e17] px-3 py-2 text-xs text-slate-200 focus:border-slate-500 focus:outline-none font-mono"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-medium text-slate-400">
+                Monitored Source Context
+              </label>
+              {isLoadingFile ? (
+                <span className="text-[10px] text-amber-400 animate-pulse font-mono">
+                  Resolving {targetFilePath} via GitHub API...
+                </span>
+              ) : (
+                <span className="text-[10px] text-slate-500 font-mono">Synced from GitHub API</span>
+              )}
+            </div>
+            <textarea
+              rows={6}
+              placeholder="// Select a repository and specify file entrypoint above..."
+              value={codeContext}
+              onChange={(e) => setCodeContext(e.target.value)}
+              disabled={isLoadingFile}
+              className="w-full rounded-lg border border-slate-700 bg-[#0a0e17] p-3 font-mono text-xs text-slate-200 focus:border-slate-500 focus:outline-none disabled:opacity-50"
+              required
+            />
+          </div>
+
+          <div className="flex justify-end gap-3 pt-3 border-t border-slate-800">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg px-4 py-2 text-xs font-medium text-slate-400 hover:bg-slate-800 transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting || isLoadingFile}
+              className="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-500 disabled:opacity-50 transition"
+            >
+              {isSubmitting ? "Registering..." : "Register Canary Flag"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\components\Navbar.tsx
+==================================================
+
+"use client";
+
+import React from "react";
+import { Organization } from "@/types";
+
+interface Props {
+  org: Organization | null;
+  onRefresh: () => void;
+  isRefreshing: boolean;
+}
+
+export default function Navbar({ org, onRefresh, isRefreshing }: Props) {
+  return (
+    <header className="flex h-16 items-center justify-between border-b border-slate-800 bg-[#070a0f] px-6">
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          <span className="text-xl font-bold">~</span>
+        </div>
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-base font-semibold text-slate-100">VaneAI</h1>
+            <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-slate-400 uppercase">
+              Enterprise
+            </span>
+          </div>
+          <p className="text-xs text-slate-500">Autonomous Canary Release & Guardrail Engine</p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/80 px-3 py-1.5 text-xs text-slate-300">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Tenant: <strong className="text-white">{org ? `${org.name} (${org.cluster_region})` : "Acme Cloud (US-East)"}</strong></span>
+        </div>
+        <button
+          onClick={onRefresh}
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors"
+          title="Yenile"
+        >
+          <span className={isRefreshing ? "animate-spin" : ""}>â†»</span>
+        </button>
+      </div>
+    </header>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\components\TelemetryPanel.tsx
+==================================================
+
+"use client";
+
+import React from "react";
+import { FeatureFlag, TelemetryData } from "@/types";
+
+interface Props {
+  flag: FeatureFlag | null;
+  telemetry: TelemetryData;
+  isSimulating: boolean;
+  onStartSimulation: () => void;
+  onStopSimulation: () => void;
+  onResetFlag: () => void;
+  onTriggerScenario: (type: "crash" | "latency" | "healthy") => void;
+}
+
+export default function TelemetryPanel({
+  flag,
+  telemetry,
+  isSimulating,
+  onStartSimulation,
+  onStopSimulation,
+  onResetFlag,
+  onTriggerScenario,
+}: Props) {
+  if (!flag) {
+    return (
+      <div className="flex h-64 items-center justify-center rounded-2xl border border-slate-800 bg-[#090d16] text-slate-500 font-mono text-sm">
+        Please select an active canary flag from the sidebar to inspect telemetry.
+      </div>
+    );
+  }
+
+  const isKilled = flag.status === "killed";
+
+  return (
+    <div className="space-y-5 rounded-2xl border border-slate-800/80 bg-[#090d16]/90 p-6 backdrop-blur-md">
+      {/* BaÅŸlÄ±k ve Rollout Durumu */}
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl font-bold tracking-tight text-white">{flag.name}</h2>
+            <span className="rounded-md border border-slate-800 bg-slate-900 px-2 py-0.5 font-mono text-xs text-emerald-400">
+              {flag.key}
+            </span>
+          </div>
+          <p className="mt-1 text-xs text-slate-400">
+            {flag.description || "Microservice deployment pipeline with autonomous AI guardrails."}
+          </p>
+        </div>
+
+        <div className="text-right">
+          <div className="text-xs uppercase tracking-wider text-slate-500">Traffic Allocation</div>
+          <div className={`text-2xl font-black ${isKilled ? "text-rose-500" : "text-emerald-400"}`}>
+            {isKilled ? "0%" : `${flag.rollout_percentage}%`}
+          </div>
+        </div>
+      </div>
+
+      {/* Ä°lerleme Ã‡ubuÄŸu */}
+      <div className="space-y-1.5">
+        <div className="flex justify-between text-[11px] text-slate-400 font-mono">
+          <span>Canary Stage Progression</span>
+          <span>{isKilled ? "BLOCKED (CIRCUIT BREAKER)" : `${flag.rollout_percentage}% / 100%`}</span>
+        </div>
+        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+          <div
+            className={`h-full transition-all duration-500 ${
+              isKilled ? "bg-rose-500 w-full" : "bg-gradient-to-r from-emerald-500 to-teal-400"
+            }`}
+            style={{ width: isKilled ? "100%" : `${flag.rollout_percentage}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Otonom SimÃ¼lasyon Kontrolleri */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-y border-slate-800/80 py-4">
+        <div className="flex items-center gap-2">
+          {isSimulating ? (
+            <button
+              onClick={onStopSimulation}
+              className="flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-500/20"
+            >
+              <span className="h-2 w-2 rounded-full bg-amber-400 animate-ping" />
+              Pause Autonomous Engine
+            </button>
+          ) : (
+            <button
+              onClick={onStartSimulation}
+              disabled={isKilled}
+              className="flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-500/20 disabled:opacity-40"
+            >
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              Start Autonomous Loop
+            </button>
+          )}
+
+          {isKilled && (
+            <button
+              onClick={onResetFlag}
+              className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-1.5 text-xs font-medium text-rose-300 hover:bg-rose-500/20"
+            >
+              â†» Recover / Reset Flag
+            </button>
+          )}
+        </div>
+
+        {/* Manuel HÄ±zlÄ± Test Tetikleyicileri */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => onTriggerScenario("crash")}
+            className="rounded-lg border border-rose-500/30 bg-rose-950/30 px-2.5 py-1.5 text-[11px] font-medium text-rose-300 hover:bg-rose-900/40"
+          >
+            ! Inject Crash
+          </button>
+          <button
+            onClick={() => onTriggerScenario("latency")}
+            className="rounded-lg border border-amber-500/30 bg-amber-950/30 px-2.5 py-1.5 text-[11px] font-medium text-amber-300 hover:bg-amber-900/40"
+          >
+            ~ Inject Latency
+          </button>
+          <button
+            onClick={() => onTriggerScenario("healthy")}
+            className="rounded-lg border border-emerald-500/30 bg-emerald-950/30 px-2.5 py-1.5 text-[11px] font-medium text-emerald-300 hover:bg-emerald-900/40"
+          >
+            âœ“ Healthy Pulse
+          </button>
+        </div>
+      </div>
+
+      {/* Telemetri Metrik KartlarÄ± */}
+      <div className="grid grid-cols-4 gap-3">
+        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-3">
+          <div className="text-[11px] uppercase tracking-wider text-slate-500">Error Rate</div>
+          <div className={`mt-1 text-lg font-bold ${telemetry.errorRate > 2 ? "text-rose-400" : "text-emerald-400"}`}>
+            {telemetry.errorRate.toFixed(2)}%
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-3">
+          <div className="text-[11px] uppercase tracking-wider text-slate-500">p99 Latency</div>
+          <div className={`mt-1 text-lg font-bold ${telemetry.p99Latency > 350 ? "text-amber-400" : "text-slate-100"}`}>
+            {telemetry.p99Latency} ms
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-3">
+          <div className="text-[11px] uppercase tracking-wider text-slate-500">Active Crashes</div>
+          <div className={`mt-1 text-lg font-bold ${telemetry.activeCrashes > 0 ? "text-rose-400" : "text-slate-100"}`}>
+            {telemetry.activeCrashes}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-3">
+          <div className="text-[11px] uppercase tracking-wider text-slate-500">Canary Sample</div>
+          <div className="mt-1 text-lg font-bold text-slate-100">{telemetry.canarySample}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+==================================================
+FILE: C:\projects\vaneai\vaneai-web\src\types\index.ts
+==================================================
+
+export interface Organization {
+  id: number;
+  name: string;
+  cluster_region: string;
+}
+
+export interface FeatureFlag {
+  id: number;
+  name: string;
+  key: string;
+  description?: string;
+  environment?: string;
+  status: "canary" | "healthy" | "investigating" | "killed";
+  rollout_percentage: number;
+  connected_repo?: string;
+  code_context?: string;
+  organization_id?: number;
+}
+
+export interface TelemetryData {
+  errorRate: number;
+  p99Latency: number;
+  activeCrashes: number;
+  canarySample: string;
+}
